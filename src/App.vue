@@ -1,540 +1,625 @@
 <script setup lang="ts">
-import { computed, reactive, ref } from 'vue'
-import MetricCard from './components/MetricCard.vue'
+import { computed, ref, watch } from 'vue'
+import type { ChartData } from 'chart.js'
+import ReportCard from './components/ReportCard.vue'
 import {
   useMetrics,
-  isRegionBreakdown,
-  type RangeKey,
-  type RegionKey,
+  periods,
+  channels,
+  type MetricKey,
+  type PeriodKey,
+  type SportKey,
+  type LeagueKey,
+  type ChannelKey,
 } from './composables/useMetrics'
+import { palette, baseLineOptions, baseBarOptions } from './charts/chartConfig'
 
-const { ranges, regions, snapshot } = useMetrics()
+const { meta, sports, getSeries, summarizeMetric, leagueBreakdown, productSnapshot } = useMetrics()
 
-type KpiKey = 'shipments' | 'ontime' | 'regional' | 'exceptions'
+// --- Global filters ---
+const selectedSport = ref<SportKey | 'all'>('all')
+const selectedLeague = ref<LeagueKey | 'all'>('all')
+const selectedChannel = ref<ChannelKey | 'all'>('all')
+const selectedPeriod = ref<PeriodKey>('full')
 
-const selectedRegion = ref<RegionKey>('all')
+const sportOptions = computed(() => [
+  { key: 'all', label: 'All Sports', icon: 'mdi-trophy' },
+  ...sports.map((s) => ({ key: s.key, label: s.label, icon: s.icon })),
+])
 
-const selectedRange = reactive<Record<KpiKey, RangeKey>>({
-  shipments: '7d',
-  ontime: '7d',
-  regional: '7d',
-  exceptions: '7d',
+const leagueOptions = computed(() => {
+  if (selectedSport.value === 'all') return [{ key: 'all', label: 'All Leagues' }]
+  const sport = sports.find((s) => s.key === selectedSport.value)
+  return [{ key: 'all', label: 'All Leagues' }, ...(sport?.leagues ?? [])]
 })
 
-const numberFmt = new Intl.NumberFormat('en-US')
-const formatNumber = (n: number) => numberFmt.format(n)
-const formatPercent = (n: number) => `${n.toFixed(1)}%`
+const leagueDisabled = computed(() => selectedSport.value === 'all')
 
-const activeRegionLabel = computed(
-  () => regions.find((r) => r.key === selectedRegion.value)?.label ?? 'All Regions',
+// Reset league when the sport changes.
+watch(selectedSport, () => {
+  selectedLeague.value = 'all'
+})
+
+const activePeriod = computed(
+  () => periods.find((p) => p.key === selectedPeriod.value) ?? periods[0]!,
 )
 
-const rangeLabel = (key: RangeKey) => ranges.find((r) => r.key === key)?.label ?? key
+const series = computed(() =>
+  getSeries(selectedSport.value, selectedLeague.value, activePeriod.value, selectedChannel.value),
+)
 
-// Per-card snapshots reactive to the selected region and that card's range.
-const shipmentsSnap = computed(() => snapshot(selectedRegion.value, selectedRange.shipments))
-const ontimeSnap = computed(() => snapshot(selectedRegion.value, selectedRange.ontime))
-const regionalSnap = computed(() => snapshot(selectedRegion.value, selectedRange.regional))
-const exceptionsSnap = computed(() => snapshot(selectedRegion.value, selectedRange.exceptions))
-
-const shipmentsPerDay = computed(() => {
-  const days = { '7d': 7, '30d': 30, '90d': 90, ytd: 166 }[selectedRange.shipments]
-  return Math.round(shipmentsSnap.value.shipments.value / days)
+// --- Formatters ---
+const currencyCompact = new Intl.NumberFormat('en-US', {
+  style: 'currency',
+  currency: 'USD',
+  notation: 'compact',
+  maximumFractionDigits: 1,
 })
-
-const ontimeTargetGap = computed(() => {
-  const m = ontimeSnap.value.onTimeRate
-  return +(m.value - m.target).toFixed(1)
+const currencyFull = new Intl.NumberFormat('en-US', {
+  style: 'currency',
+  currency: 'USD',
+  maximumFractionDigits: 0,
 })
+const numberCompact = new Intl.NumberFormat('en-US', {
+  notation: 'compact',
+  maximumFractionDigits: 1,
+})
+const numberFull = new Intl.NumberFormat('en-US')
 
-// Regional card: either region rows (when "All") or hub rows (specific region).
-const regionalRows = computed(() => regionalSnap.value.regional)
-const showingRegions = computed(() => isRegionBreakdown(regionalRows.value))
+const fmtMoney = (n: number) => currencyCompact.format(n)
+const fmtMoneyFull = (n: number) => currencyFull.format(n)
+const fmtNum = (n: number) => numberCompact.format(n)
+const fmtNumFull = (n: number) => numberFull.format(n)
+const fmtPct = (n: number) => `${n.toFixed(1)}%`
 
-// --- See Details right panel ---
-const detailsOpen = ref(false)
-const activeKpi = ref<KpiKey>('shipments')
+// --- Summaries ---
+const revenueSum = computed(() => summarizeMetric(series.value, 'revenue'))
+const viewersSum = computed(() => summarizeMetric(series.value, 'viewers'))
+const conversionsSum = computed(() => summarizeMetric(series.value, 'conversions'))
+const ordersSum = computed(() => summarizeMetric(series.value, 'orders'))
 
-const kpiMeta: Record<KpiKey, { title: string; icon: string }> = {
-  shipments: { title: 'Shipment Volume', icon: 'mdi-truck-fast' },
-  ontime: { title: 'On-Time Delivery Rate', icon: 'mdi-clock-check' },
-  regional: { title: 'Regional Performance', icon: 'mdi-map-marker-radius' },
-  exceptions: { title: 'Open Exceptions', icon: 'mdi-alert-circle' },
+// --- Chart datasets ---
+function lineData(data: number[], color: string, label: string): ChartData<'line' | 'bar'> {
+  return {
+    labels: series.value.labels,
+    datasets: [
+      {
+        label,
+        data,
+        borderColor: color,
+        backgroundColor: `${color}22`,
+        borderWidth: 2,
+        fill: true,
+        tension: 0.35,
+        pointRadius: 2,
+        pointBackgroundColor: color,
+      },
+    ],
+  }
 }
 
-function openDetails(kpi: KpiKey) {
-  activeKpi.value = kpi
+function barData(data: number[], color: string, label: string): ChartData<'line' | 'bar'> {
+  return {
+    labels: series.value.labels,
+    datasets: [
+      {
+        label,
+        data,
+        backgroundColor: color,
+        borderRadius: 6,
+        maxBarThickness: 34,
+      },
+    ],
+  }
+}
+
+const revenueChart = computed(() => lineData(series.value.revenue, palette.blue, 'Revenue'))
+const viewersChart = computed(() => barData(series.value.viewers, palette.teal, 'Viewers'))
+const conversionsChart = computed(() =>
+  lineData(series.value.conversions, palette.orange, 'Conversion rate'),
+)
+const ordersChart = computed(() => barData(series.value.orders, palette.violet, 'Orders'))
+
+const revenueOpts = baseLineOptions(fmtMoney)
+const viewersOpts = baseBarOptions(fmtNum)
+const conversionsOpts = baseLineOptions((v) => `${v}%`)
+const ordersOpts = baseBarOptions(fmtNum)
+
+// --- Products snapshot ---
+const products = computed(() =>
+  productSnapshot(selectedSport.value, activePeriod.value, selectedChannel.value),
+)
+
+// --- Details modal ---
+const detailsOpen = ref(false)
+const activeMetric = ref<MetricKey>('revenue')
+
+const metricMeta: Record<
+  MetricKey,
+  { title: string; icon: string; format: (n: number) => string; mode: 'sum' | 'avg' }
+> = {
+  revenue: { title: 'Revenue', icon: 'mdi-cash-multiple', format: fmtMoneyFull, mode: 'sum' },
+  viewers: { title: 'Viewers', icon: 'mdi-eye', format: fmtNumFull, mode: 'sum' },
+  conversions: { title: 'Conversion Rate', icon: 'mdi-percent', format: fmtPct, mode: 'avg' },
+  orders: { title: 'Orders', icon: 'mdi-cart', format: fmtNumFull, mode: 'sum' },
+}
+
+function openDetails(metric: MetricKey) {
+  activeMetric.value = metric
   detailsOpen.value = true
 }
 
-const detailSnap = computed(() =>
-  snapshot(selectedRegion.value, selectedRange[activeKpi.value]),
+const detailSummary = computed(() => summarizeMetric(series.value, activeMetric.value))
+const detailMonthly = computed(() => {
+  const s = series.value
+  return s.labels.map((label, i) => ({ month: label, value: s[activeMetric.value][i] ?? 0 }))
+})
+const detailBreakdown = computed(() =>
+  leagueBreakdown(
+    selectedSport.value,
+    activePeriod.value,
+    activeMetric.value,
+    selectedChannel.value,
+  ),
 )
+const breakdownMax = computed(() => Math.max(1, ...detailBreakdown.value.map((r) => r.value)))
 
-const detailRangeLabel = computed(() => rangeLabel(selectedRange[activeKpi.value]))
-
-// Breakdown rows for the panel (regions when "All", hubs otherwise).
-const detailRows = computed(() => detailSnap.value.regional)
-const detailShowingRegions = computed(() => isRegionBreakdown(detailRows.value))
+const activeSportLabel = computed(
+  () => sportOptions.value.find((s) => s.key === selectedSport.value)?.label ?? 'All Sports',
+)
+const activeLeagueLabel = computed(
+  () => leagueOptions.value.find((l) => l.key === selectedLeague.value)?.label ?? 'All Leagues',
+)
+const activeChannelLabel = computed(
+  () => channels.find((c) => c.key === selectedChannel.value)?.label ?? 'All Channels',
+)
+const contextLabel = computed(() => {
+  const scope =
+    selectedSport.value === 'all'
+      ? 'All Sports'
+      : selectedLeague.value === 'all'
+        ? activeSportLabel.value
+        : `${activeSportLabel.value} · ${activeLeagueLabel.value}`
+  const channelLabel =
+    selectedChannel.value === 'all' ? 'All Channels' : activeChannelLabel.value
+  return `${scope} · ${channelLabel} · ${activePeriod.value.label}`
+})
 </script>
 
 <template>
   <v-app>
-    <v-app-bar class="top-header" flat height="84">
+    <v-app-bar class="app-header" flat height="68">
       <template #prepend>
-        <v-avatar class="brand-icon ms-2" size="52" rounded="lg">
-          <v-icon icon="mdi-truck-fast" size="32" color="white" />
+        <v-avatar class="logo-mark ms-2" size="40" rounded="lg">
+          <v-icon icon="mdi-bullseye-arrow" color="white" size="24" />
         </v-avatar>
-        <div class="ms-3">
-          <p class="eyebrow">Operations Dashboard</p>
-          <h1 class="brand-title">FastForward Logistics</h1>
+        <div class="ms-3 brand-text">
+          <span class="brand-name">{{ meta.company }}</span>
+          <span class="brand-sub">Sports Ad Analytics</span>
         </div>
       </template>
 
       <template #append>
+        <v-btn icon="mdi-bell-outline" variant="text" class="me-1" />
         <v-menu location="bottom end" offset="8">
           <template #activator="{ props }">
-            <v-btn
-              v-bind="props"
-              class="profile-trigger me-2"
-              variant="outlined"
-              rounded="pill"
-            >
-              <v-avatar class="avatar me-2" size="30">VP</v-avatar>
-              Ops Lead
+            <v-btn v-bind="props" class="profile-btn me-2" variant="text" rounded="pill">
+              <v-avatar class="me-2" size="30" color="primary">
+                <span class="avatar-initials">AM</span>
+              </v-avatar>
+              <span class="profile-name">Alex Morgan</span>
               <v-icon end icon="mdi-chevron-down" />
             </v-btn>
           </template>
-          <v-list density="compact" min-width="180" rounded="lg">
+          <v-list density="compact" min-width="190" rounded="lg">
             <v-list-item title="Profile" prepend-icon="mdi-account" />
-            <v-list-item title="Settings" prepend-icon="mdi-cog" />
+            <v-list-item title="Account settings" prepend-icon="mdi-cog" />
             <v-list-item title="Sign out" prepend-icon="mdi-logout" />
           </v-list>
         </v-menu>
       </template>
     </v-app-bar>
 
-    <v-main class="dashboard-main">
-      <v-container class="py-6">
-        <div class="section-header-row">
-          <div class="section-heading">
-            <h2 class="section-title">Operations Overview</h2>
-            <p class="section-subtitle">
-              Key performance indicators for {{ activeRegionLabel }}
-            </p>
+    <v-main class="dashboard">
+      <v-container class="py-6" fluid>
+        <!-- Title + filters -->
+        <div class="page-head">
+          <div>
+            <h1 class="page-title">Campaign Performance</h1>
+            <p class="page-sub">{{ contextLabel }}</p>
           </div>
-
-          <div class="region-picker">
-            <span class="region-picker-label">Region</span>
-            <v-chip-group
-              v-model="selectedRegion"
-              class="region-chips"
-              selected-class="region-chip-active"
-              mandatory
-              column
-            >
-              <v-chip
-                v-for="region in regions"
-                :key="region.key"
-                :value="region.key"
-                size="small"
-                variant="outlined"
-                rounded="pill"
-              >
-                {{ region.label }}
-              </v-chip>
-            </v-chip-group>
+          <div class="filters">
+            <v-select
+              v-model="selectedSport"
+              :items="sportOptions"
+              item-title="label"
+              item-value="key"
+              label="Sport"
+              variant="solo-filled"
+              density="comfortable"
+              hide-details
+              flat
+              class="filter-select"
+              prepend-inner-icon="mdi-trophy-outline"
+            />
+            <v-select
+              v-model="selectedLeague"
+              :items="leagueOptions"
+              item-title="label"
+              item-value="key"
+              label="League"
+              variant="solo-filled"
+              density="comfortable"
+              hide-details
+              flat
+              class="filter-select"
+              :disabled="leagueDisabled"
+              prepend-inner-icon="mdi-shield-outline"
+            />
+            <v-select
+              v-model="selectedChannel"
+              :items="channels"
+              item-title="label"
+              item-value="key"
+              label="Channel"
+              variant="solo-filled"
+              density="comfortable"
+              hide-details
+              flat
+              class="filter-select"
+              prepend-inner-icon="mdi-access-point"
+            />
+            <v-select
+              v-model="selectedPeriod"
+              :items="periods"
+              item-title="label"
+              item-value="key"
+              label="Time period"
+              variant="solo-filled"
+              density="comfortable"
+              hide-details
+              flat
+              class="filter-select"
+              prepend-inner-icon="mdi-calendar-range"
+            />
           </div>
         </div>
 
+        <!-- Four report cards -->
         <v-row align="stretch">
-          <!-- Shipment Volume -->
-          <v-col cols="12" md="6" class="d-flex">
-            <MetricCard
-              v-model="selectedRange.shipments"
-              label="Shipment Volume"
-              :ranges="ranges"
-              :value="formatNumber(shipmentsSnap.shipments.value)"
-              :delta="shipmentsSnap.shipments.delta"
-              :trend="shipmentsSnap.shipments.trend"
-              :note="`≈ ${formatNumber(shipmentsPerDay)} shipments/day · ${activeRegionLabel}`"
-              @see-details="openDetails('shipments')"
+          <v-col cols="12" md="6" xl="3" class="d-flex">
+            <ReportCard
+              title="Revenue"
+              icon="mdi-cash-multiple"
+              :headline="fmtMoney(revenueSum.total)"
+              caption="total this period"
+              :delta="revenueSum.delta"
+              chart-type="line"
+              :chart-data="revenueChart"
+              :line-options="revenueOpts"
+              @details="openDetails('revenue')"
             />
           </v-col>
-
-          <!-- On-Time Delivery -->
-          <v-col cols="12" md="6" class="d-flex">
-            <MetricCard
-              v-model="selectedRange.ontime"
-              label="On-Time Delivery Rate"
-              :ranges="ranges"
-              :value="formatPercent(ontimeSnap.onTimeRate.value)"
-              :delta="ontimeSnap.onTimeRate.delta"
-              :trend="ontimeSnap.onTimeRate.trend"
-              @see-details="openDetails('ontime')"
-            >
-              <div class="ontime-target">
-                <div class="target-row">
-                  <span>Target {{ formatPercent(ontimeSnap.onTimeRate.target) }}</span>
-                  <span :class="ontimeTargetGap >= 0 ? 'gap-good' : 'gap-bad'">
-                    {{ ontimeTargetGap >= 0 ? '+' : '' }}{{ ontimeTargetGap }} pts
-                  </span>
-                </div>
-                <v-progress-linear
-                  :model-value="ontimeSnap.onTimeRate.value"
-                  :max="100"
-                  color="primary"
-                  height="8"
-                  rounded
-                  bg-color="#ece6fb"
-                />
-              </div>
-            </MetricCard>
+          <v-col cols="12" md="6" xl="3" class="d-flex">
+            <ReportCard
+              title="Viewers"
+              icon="mdi-eye"
+              :headline="fmtNum(viewersSum.total)"
+              caption="impressions reached"
+              :delta="viewersSum.delta"
+              chart-type="bar"
+              :chart-data="viewersChart"
+              :bar-options="viewersOpts"
+              @details="openDetails('viewers')"
+            />
           </v-col>
-
-          <!-- Regional Performance -->
-          <v-col cols="12" md="6" class="d-flex">
-            <MetricCard
-              v-model="selectedRange.regional"
-              :label="showingRegions ? 'Regional Performance' : 'Hub Performance'"
-              :ranges="ranges"
-              @see-details="openDetails('regional')"
-            >
-              <v-table density="compact" class="breakdown-table">
-                <thead>
-                  <tr>
-                    <th>{{ showingRegions ? 'Region' : 'Hub' }}</th>
-                    <th class="text-right">Shipments</th>
-                    <th class="text-right">On-Time</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr v-for="row in regionalRows" :key="'hub' in row ? row.hub : row.region">
-                    <td>{{ 'hub' in row ? row.hub : row.label }}</td>
-                    <td class="text-right">{{ formatNumber(row.shipments) }}</td>
-                    <td class="text-right">
-                      <span class="ontime-pill" :class="{ low: row.onTimeRate < 92 }">
-                        {{ formatPercent(row.onTimeRate) }}
-                      </span>
-                    </td>
-                  </tr>
-                </tbody>
-              </v-table>
-            </MetricCard>
+          <v-col cols="12" md="6" xl="3" class="d-flex">
+            <ReportCard
+              title="Conversion Rate"
+              icon="mdi-percent"
+              :headline="fmtPct(conversionsSum.average)"
+              caption="period average"
+              :delta="conversionsSum.delta"
+              chart-type="line"
+              :chart-data="conversionsChart"
+              :line-options="conversionsOpts"
+              @details="openDetails('conversions')"
+            />
           </v-col>
-
-          <!-- Open Exceptions -->
-          <v-col cols="12" md="6" class="d-flex">
-            <MetricCard
-              v-model="selectedRange.exceptions"
-              label="Open Exceptions"
-              :ranges="ranges"
-              :value="formatNumber(exceptionsSnap.exceptions.value)"
-              :delta="exceptionsSnap.exceptions.delta"
-              :delta-positive-is-good="false"
-              note="Unresolved shipment issues"
-              @see-details="openDetails('exceptions')"
-            >
-              <ul class="exception-list">
-                <li v-for="item in exceptionsSnap.exceptions.byType" :key="item.type">
-                  <span class="exc-type">{{ item.type }}</span>
-                  <span class="exc-count">{{ formatNumber(item.count) }}</span>
-                </li>
-              </ul>
-            </MetricCard>
+          <v-col cols="12" md="6" xl="3" class="d-flex">
+            <ReportCard
+              title="Orders"
+              icon="mdi-cart"
+              :headline="fmtNum(ordersSum.total)"
+              caption="orders placed"
+              :delta="ordersSum.delta"
+              chart-type="bar"
+              :chart-data="ordersChart"
+              :bar-options="ordersOpts"
+              @details="openDetails('orders')"
+            />
           </v-col>
         </v-row>
+
+        <!-- Products snapshot -->
+        <v-card class="products-card mt-2" border>
+          <div class="products-head">
+            <div class="d-flex align-center ga-2">
+              <v-icon icon="mdi-package-variant-closed" color="primary" />
+              <h2 class="products-title">Products Snapshot</h2>
+            </div>
+            <span class="products-context">{{ contextLabel }}</span>
+          </div>
+          <v-table class="products-table">
+            <thead>
+              <tr>
+                <th>Product</th>
+                <th>Sport</th>
+                <th class="text-right">Revenue</th>
+                <th class="text-right">Orders</th>
+                <th class="text-right">Conv. Rate</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="p in products" :key="p.name">
+                <td class="product-name">{{ p.name }}</td>
+                <td>
+                  <v-chip size="x-small" variant="tonal" color="primary">{{ p.sport }}</v-chip>
+                </td>
+                <td class="text-right num">{{ fmtMoneyFull(p.revenue) }}</td>
+                <td class="text-right num">{{ fmtNumFull(p.orders) }}</td>
+                <td class="text-right num">{{ fmtPct(p.conversions) }}</td>
+              </tr>
+              <tr v-if="products.length === 0">
+                <td colspan="5" class="text-center text-medium-emphasis py-6">
+                  No products for this selection.
+                </td>
+              </tr>
+            </tbody>
+          </v-table>
+        </v-card>
       </v-container>
     </v-main>
 
-    <v-footer class="footer" app absolute>
-      <v-avatar class="footer-logo me-2" size="28" rounded="md">
-        <v-icon icon="mdi-truck-fast" size="18" color="white" />
-      </v-avatar>
-      <span>© 2026 FastForward Logistics</span>
+    <v-footer class="app-footer" app absolute>
+      <span>© {{ meta.year }} {{ meta.company }} · Internal analytics</span>
     </v-footer>
 
-    <!-- See Details right panel -->
-    <v-navigation-drawer
-      v-model="detailsOpen"
-      location="right"
-      temporary
-      width="420"
-      class="details-drawer"
-      :style="{ zIndex: 9999 }"
-    >
-      <div class="details-header">
-        <div class="d-flex align-center ga-3">
-          <v-avatar class="details-icon" size="40" rounded="lg">
-            <v-icon :icon="kpiMeta[activeKpi].icon" color="white" size="22" />
-          </v-avatar>
-          <div>
-            <p class="details-eyebrow">{{ activeRegionLabel }} · {{ detailRangeLabel }}</p>
-            <h3 class="details-title">{{ kpiMeta[activeKpi].title }}</h3>
+    <!-- Report details modal -->
+    <v-dialog v-model="detailsOpen" max-width="640" scrollable>
+      <v-card class="details-card">
+        <v-card-title class="details-header">
+          <div class="d-flex align-center ga-3">
+            <v-avatar class="details-icon" size="38" rounded="md">
+              <v-icon :icon="metricMeta[activeMetric].icon" />
+            </v-avatar>
+            <div>
+              <span class="details-title">{{ metricMeta[activeMetric].title }}</span>
+              <span class="details-context">{{ contextLabel }}</span>
+            </div>
           </div>
-        </div>
-        <v-btn icon="mdi-close" variant="text" size="small" @click="detailsOpen = false" />
-      </div>
+          <v-btn icon="mdi-close" variant="text" size="small" @click="detailsOpen = false" />
+        </v-card-title>
+        <v-divider />
+        <v-card-text class="details-body">
+          <div class="details-summary">
+            <div class="summary-block">
+              <span class="summary-label">
+                {{ metricMeta[activeMetric].mode === 'avg' ? 'Average' : 'Total' }}
+              </span>
+              <span class="summary-value">
+                {{
+                  metricMeta[activeMetric].format(
+                    metricMeta[activeMetric].mode === 'avg'
+                      ? detailSummary.average
+                      : detailSummary.total,
+                  )
+                }}
+              </span>
+            </div>
+            <div class="summary-block">
+              <span class="summary-label">Momentum</span>
+              <span class="summary-value" :class="detailSummary.delta >= 0 ? 'pos' : 'neg'">
+                {{ detailSummary.delta >= 0 ? '+' : '' }}{{ detailSummary.delta.toFixed(1) }}%
+              </span>
+            </div>
+          </div>
 
-      <v-divider />
+          <h3 class="details-section">Monthly breakdown</h3>
+          <v-table density="compact" class="details-table">
+            <thead>
+              <tr>
+                <th>Month</th>
+                <th class="text-right">{{ metricMeta[activeMetric].title }}</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="row in detailMonthly" :key="row.month">
+                <td>{{ row.month }}</td>
+                <td class="text-right num">{{ metricMeta[activeMetric].format(row.value) }}</td>
+              </tr>
+            </tbody>
+          </v-table>
 
-      <div class="details-body">
-        <!-- Headline value -->
-        <div v-if="activeKpi === 'shipments'" class="detail-headline">
-          <span class="detail-value">{{ formatNumber(detailSnap.shipments.value) }}</span>
-          <span class="detail-caption">total shipments</span>
-        </div>
-        <div v-else-if="activeKpi === 'ontime'" class="detail-headline">
-          <span class="detail-value">{{ formatPercent(detailSnap.onTimeRate.value) }}</span>
-          <span class="detail-caption">
-            target {{ formatPercent(detailSnap.onTimeRate.target) }}
-          </span>
-        </div>
-        <div v-else-if="activeKpi === 'exceptions'" class="detail-headline">
-          <span class="detail-value">{{ formatNumber(detailSnap.exceptions.value) }}</span>
-          <span class="detail-caption">open exceptions</span>
-        </div>
-
-        <!-- Exceptions: by-type breakdown -->
-        <template v-if="activeKpi === 'exceptions'">
-          <h4 class="detail-section-title">By type</h4>
-          <ul class="detail-exc-list">
-            <li v-for="item in detailSnap.exceptions.byType" :key="item.type">
-              <span class="exc-type">{{ item.type }}</span>
-              <span class="exc-count">{{ formatNumber(item.count) }}</span>
-            </li>
-          </ul>
-        </template>
-
-        <!-- Regional / hub breakdown for all KPIs -->
-        <h4 class="detail-section-title">
-          {{ detailShowingRegions ? 'By region' : 'By hub' }}
-        </h4>
-        <v-table density="compact" class="detail-table">
-          <thead>
-            <tr>
-              <th>{{ detailShowingRegions ? 'Region' : 'Hub' }}</th>
-              <th class="text-right">Shipments</th>
-              <th class="text-right">On-Time</th>
-              <th v-if="detailShowingRegions" class="text-right">Exc.</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-for="row in detailRows" :key="'hub' in row ? row.hub : row.region">
-              <td>{{ 'hub' in row ? row.hub : row.label }}</td>
-              <td class="text-right">{{ formatNumber(row.shipments) }}</td>
-              <td class="text-right">
-                <span class="ontime-pill" :class="{ low: row.onTimeRate < 92 }">
-                  {{ formatPercent(row.onTimeRate) }}
-                </span>
-              </td>
-              <td v-if="detailShowingRegions && 'exceptions' in row" class="text-right">
-                {{ formatNumber(row.exceptions) }}
-              </td>
-            </tr>
-          </tbody>
-        </v-table>
-      </div>
-    </v-navigation-drawer>
+          <h3 class="details-section">By league</h3>
+          <div class="breakdown-list">
+            <div
+              v-for="row in detailBreakdown"
+              :key="row.sport + row.league"
+              class="breakdown-row"
+            >
+              <div class="breakdown-info">
+                <span class="breakdown-league">{{ row.league }}</span>
+                <span class="breakdown-sport">{{ row.sport }}</span>
+              </div>
+              <div class="breakdown-bar-wrap">
+                <div
+                  class="breakdown-bar"
+                  :style="{ width: `${(row.value / breakdownMax) * 100}%` }"
+                />
+              </div>
+              <span class="breakdown-value">{{ metricMeta[activeMetric].format(row.value) }}</span>
+            </div>
+          </div>
+        </v-card-text>
+        <v-divider />
+        <v-card-actions>
+          <v-spacer />
+          <v-btn variant="tonal" color="primary" @click="detailsOpen = false">Close</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
   </v-app>
 </template>
 
 <style scoped>
-/* App bar / header */
-.top-header :deep(.v-toolbar__content) {
-  background: linear-gradient(95deg, #c9b8ff 0%, #ffffff 75%);
-  border-bottom: 1px solid #dfd2ff;
+/* Header */
+.app-header :deep(.v-toolbar__content) {
+  background: linear-gradient(90deg, #11151c 0%, #161b22 100%);
+  border-bottom: 1px solid #232a33;
 }
 
-.brand-icon {
-  background: linear-gradient(145deg, #7049dd, #9a82e7);
+.logo-mark {
+  background: linear-gradient(145deg, #4f8cff, #22c1a6);
 }
 
-.eyebrow {
-  margin: 0;
-  color: var(--brand-purple-strong);
-  font-weight: 600;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  font-size: 0.72rem;
-}
-
-.brand-title {
-  margin: 2px 0 0;
-  font-size: clamp(1.3rem, 2.2vw, 1.6rem);
+.brand-text {
+  display: flex;
+  flex-direction: column;
   line-height: 1.1;
-  color: var(--brand-purple-strong);
 }
 
-.profile-trigger {
-  color: var(--brand-purple-strong);
-  font-weight: 700;
+.brand-name {
+  font-weight: 800;
+  font-size: 1.02rem;
+  color: #ffffff;
+}
+
+.brand-sub {
+  font-size: 0.72rem;
+  color: #8b949e;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.profile-btn {
   text-transform: none;
 }
 
-.avatar {
-  background: #6438d4;
+.profile-name {
+  color: #e6edf3;
+  font-weight: 600;
+}
+
+.avatar-initials {
+  font-size: 0.74rem;
+  font-weight: 700;
   color: #fff;
-  font-size: 0.76rem;
 }
 
-/* Main / sections */
-.dashboard-main {
-  background: #ffffff;
+/* Dashboard body */
+.dashboard {
+  background: #0e1117;
 }
 
-.section-header-row {
-  margin-bottom: 18px;
+.page-head {
   display: flex;
   flex-wrap: wrap;
   gap: 16px;
-  align-items: flex-start;
+  align-items: flex-end;
   justify-content: space-between;
+  margin-bottom: 18px;
 }
 
-.section-heading {
-  min-width: 220px;
-}
-
-.section-title {
+.page-title {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: #ffffff;
   margin: 0;
-  color: #3c3c42;
-  font-size: 1.25rem;
 }
 
-.section-subtitle {
-  margin: 6px 0 0;
-  color: var(--text-mid);
-  font-size: 0.95rem;
+.page-sub {
+  margin: 4px 0 0;
+  color: #8b949e;
+  font-size: 0.9rem;
 }
 
-/* Region picker */
-.region-picker {
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.filter-select {
+  min-width: 190px;
+}
+
+/* Products */
+.products-card {
+  background: #161b22;
+}
+
+.products-head {
   display: flex;
   align-items: center;
-  gap: 10px;
-  max-width: 100%;
-}
-
-.region-picker-label {
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--brand-purple-strong);
-  white-space: nowrap;
-}
-
-.region-chips :deep(.region-chip-active) {
-  background: var(--brand-purple-strong);
-  color: #fff;
-  border-color: var(--brand-purple-strong);
-}
-
-/* On-time target */
-.ontime-target {
-  margin-top: 14px;
-}
-
-.target-row {
-  display: flex;
   justify-content: space-between;
-  font-size: 0.82rem;
-  color: var(--text-mid);
-  margin-bottom: 6px;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 16px 18px 8px;
 }
 
-.gap-good {
-  color: var(--success);
+.products-title {
+  font-size: 1.05rem;
   font-weight: 700;
+  color: #e6edf3;
+  margin: 0;
 }
 
-.gap-bad {
-  color: var(--danger);
-  font-weight: 700;
+.products-context {
+  font-size: 0.8rem;
+  color: #8b949e;
 }
 
-/* Breakdown table */
-.breakdown-table {
-  margin-top: 6px;
+.products-table {
   background: transparent;
 }
 
-.breakdown-table :deep(th) {
+.products-table :deep(th) {
   font-size: 0.72rem !important;
   text-transform: uppercase;
   letter-spacing: 0.04em;
-  color: var(--text-mid) !important;
+  color: #8b949e !important;
 }
 
-.breakdown-table :deep(td) {
-  font-size: 0.86rem;
+.products-table :deep(td) {
+  font-size: 0.88rem;
+  color: #d8e0e8;
+}
+
+.product-name {
+  font-weight: 600;
+  color: #ffffff !important;
+}
+
+.num {
+  font-variant-numeric: tabular-nums;
 }
 
 .text-right {
   text-align: right !important;
 }
 
-.ontime-pill {
-  font-weight: 700;
-  color: var(--success);
-}
-
-.ontime-pill.low {
-  color: #c47b00;
-}
-
-/* Exceptions list */
-.exception-list {
-  list-style: none;
-  margin: 12px 0 0;
-  padding: 0;
-}
-
-.exception-list li {
-  display: flex;
-  justify-content: space-between;
-  padding: 6px 0;
-  border-bottom: 1px solid var(--card-border);
-  font-size: 0.86rem;
-}
-
-.exception-list li:last-child {
-  border-bottom: none;
-}
-
-.exc-type {
-  color: var(--text-mid);
-}
-
-.exc-count {
-  font-weight: 700;
-  color: #2f2f34;
-}
-
 /* Footer */
-.footer {
-  background: linear-gradient(95deg, #ffffff 0%, #c7b3ff 100%);
-  color: var(--brand-purple-strong);
-  border-top: 1px solid #dfd2ff;
-  font-size: 0.86rem;
-  font-weight: 700;
+.app-footer {
+  background: #11151c;
+  border-top: 1px solid #232a33;
+  color: #8b949e;
+  font-size: 0.8rem;
 }
 
-.footer-logo {
-  background: linear-gradient(145deg, #724bdf, #8c6ae7);
-}
-
-/* See Details drawer */
-.details-drawer {
-  top: 0 !important;
-  height: 100vh !important;
-  max-height: 100vh !important;
-}
-
-.details-drawer :deep(.v-navigation-drawer__scrim),
-:deep(.v-navigation-drawer__scrim) {
-  z-index: 9998;
+/* Details modal */
+.details-card {
+  background: #161b22;
 }
 
 .details-header {
@@ -546,86 +631,147 @@ const detailShowingRegions = computed(() => isRegionBreakdown(detailRows.value))
 }
 
 .details-icon {
-  background: linear-gradient(145deg, #7049dd, #9a82e7);
-}
-
-.details-eyebrow {
-  margin: 0;
-  font-size: 0.72rem;
-  font-weight: 600;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  color: var(--brand-purple-strong);
+  background: rgba(79, 140, 255, 0.16);
+  color: #4f8cff;
 }
 
 .details-title {
-  margin: 2px 0 0;
+  display: block;
   font-size: 1.1rem;
-  color: #3c3c42;
+  font-weight: 700;
+  color: #ffffff;
   line-height: 1.2;
+}
+
+.details-context {
+  font-size: 0.78rem;
+  color: #8b949e;
 }
 
 .details-body {
   padding: 16px;
 }
 
-.detail-headline {
+.details-summary {
   display: flex;
-  align-items: baseline;
-  gap: 10px;
-  margin-bottom: 18px;
+  gap: 12px;
+  margin-bottom: 8px;
 }
 
-.detail-value {
-  font-size: 2.1rem;
+.summary-block {
+  flex: 1 1 0;
+  background: #0e1117;
+  border: 1px solid #232a33;
+  border-radius: 10px;
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.summary-label {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #8b949e;
+}
+
+.summary-value {
+  font-size: 1.35rem;
   font-weight: 800;
-  color: #2f2f34;
-  line-height: 1;
+  color: #ffffff;
 }
 
-.detail-caption {
-  font-size: 0.84rem;
-  color: var(--text-mid);
+.summary-value.pos {
+  color: #22c1a6;
 }
 
-.detail-section-title {
-  margin: 18px 0 8px;
+.summary-value.neg {
+  color: #ff5a6a;
+}
+
+.details-section {
   font-size: 0.78rem;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  color: var(--text-mid);
+  color: #8b949e;
+  margin: 18px 0 8px;
 }
 
-.detail-table {
+.details-table {
   background: transparent;
 }
 
-.detail-table :deep(th) {
+.details-table :deep(th) {
   font-size: 0.72rem !important;
   text-transform: uppercase;
-  letter-spacing: 0.04em;
-  color: var(--text-mid) !important;
+  color: #8b949e !important;
 }
 
-.detail-table :deep(td) {
+.details-table :deep(td) {
+  color: #d8e0e8;
   font-size: 0.86rem;
 }
 
-.detail-exc-list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.detail-exc-list li {
+.breakdown-list {
   display: flex;
-  justify-content: space-between;
-  padding: 8px 0;
-  border-bottom: 1px solid var(--card-border);
-  font-size: 0.88rem;
+  flex-direction: column;
+  gap: 10px;
 }
 
-.detail-exc-list li:last-child {
-  border-bottom: none;
+.breakdown-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.breakdown-info {
+  display: flex;
+  flex-direction: column;
+  min-width: 120px;
+}
+
+.breakdown-league {
+  font-size: 0.86rem;
+  font-weight: 600;
+  color: #e6edf3;
+}
+
+.breakdown-sport {
+  font-size: 0.72rem;
+  color: #8b949e;
+}
+
+.breakdown-bar-wrap {
+  flex: 1 1 auto;
+  height: 8px;
+  background: #0e1117;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.breakdown-bar {
+  height: 100%;
+  background: linear-gradient(90deg, #4f8cff, #22c1a6);
+  border-radius: 6px;
+}
+
+.breakdown-value {
+  min-width: 92px;
+  text-align: right;
+  font-size: 0.84rem;
+  font-weight: 700;
+  color: #ffffff;
+  font-variant-numeric: tabular-nums;
+}
+
+@media (max-width: 600px) {
+  .filters {
+    width: 100%;
+  }
+  .filter-select {
+    flex: 1 1 140px;
+    min-width: 0;
+  }
 }
 </style>

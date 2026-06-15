@@ -1,25 +1,33 @@
-# Design Brief
+# First-Vue-App Dashboard
 
 ## Summary
 
-FastForward Logistics is a mid-size freight and supply chain company. Their ops team is drowning in spreadsheets. The VP of Operations wants a single internal dashboard she can pull up in leadership meetings to see how the business is running: shipment volume, on-time delivery rates, regional performance, and open exceptions. With no in-house dev team, they came to you.
+A single page analytics dashboard for a company in the advertising business that is heavily driven towards the sports marketing. The team wants a dashboard that allows the user to select different sports where they are advertising their products, and then the breakdown of the leagues from the different sports. They also want to be able to see all their products in a single snapshot view on this dashboard. 
+
+
+## Data
+Generate a fake dataset as a JSON file (src/data/metrics) with 12 months of data (Jan-Dec 2026), each month containing: 
+- revenue (dollara amount, trending direction)
+- viewers (number, seasonal pattern including on event popularity)
+- conversions (percentages, dollar value)
+- orders (number, correlates with viewers)
+
+## Layout (Vuetify)
+- Working interactive prototype
+- Header on top of dashboard including company logo on left and user profile menu on the right
+- Global filters for sport, leagues within any given sport, channel (includes things like Internet, Radio, TV, etc) and time filter
+- Four reports that default to showing time frame within the selected time filter
+- Google font: Open Sans
+- Have a button at the bottom of each report card that opens up details in a modal
+
+## Style
+- Dark theme by default
+- Mobile responsive
+- Lots of darks and greys for colour palette but white background for data
+- Charts should have a cohesive colour palette
 
 ## Tech
-- Pure HTML, CSS, and JavaScript - no frameworks, no build tools
-- Single index.html file (CSS and JS can be separate files)
-- Deploys to Vercel as a static site
-- Create a fake dataset as a JSON file (src/data/metrics.json) 
-- Add an interactive region picker
-
-## Design
-- Working interactive prototype
-- Google font: Open Sans
-- Use a purple and white color scheme for the company branding but use others colors for the charts and data
-- Header with the name of the company, FastForward Logistics, in the top left with an icon that represents "speed". On the top right of the Header should be the user's profile menu. The Header should have a purple to white gradient background. Header text should be purple like the company's branding.
-- Separate cards that track shipment volume, on-time delivery rates, regional performance, and open exceptions
-- For each of these KPI cards, add controls that allow the user to change date ranges and view data for different date ranges
-- Section titles should be dark grey
-- Have a button at the right bottom of each card labeled "See Details" for every card. On click, it should open a right panel containing details and further breakdowns of the KPI metric.
-
-## Nice to Have
-- Footer with copyright and FastForward Logistics logo doing the opposite gradient of the Header
+- Vue 3 + TypeScript + Vuetify3
+- Chart.js via vue-chartjs for all charts
+- Fake data from a local JSON (no API calls)
+- Single page - no routing needed for this app
