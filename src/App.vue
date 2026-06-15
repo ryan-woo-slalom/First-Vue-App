@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { reactive, ref } from 'vue'
 
 const profileMenuOpen = ref(false)
 
@@ -7,7 +7,98 @@ function toggleProfileMenu() {
   profileMenuOpen.value = !profileMenuOpen.value
 }
 
-const ranges = ['7d', '30d', '90d', 'YTD']
+type RangeKey = '7d' | '30d' | '90d' | 'ytd'
+
+const ranges: { key: RangeKey; label: string }[] = [
+  { key: '7d', label: '7d' },
+  { key: '30d', label: '30d' },
+  { key: '90d', label: '90d' },
+  { key: 'ytd', label: 'YTD' },
+]
+
+const dashboardData = {
+  shipments: {
+    '7d': { value: '1,284', delta: 4.6, note: 'Compared to previous 7 days', bars: [58, 63, 47, 66, 71, 68, 74] },
+    '30d': { value: '5,392', delta: 6.3, note: 'Compared to previous 30 days', bars: [44, 51, 48, 56, 62, 68, 72] },
+    '90d': { value: '15,742', delta: 3.1, note: 'Compared to previous 90 days', bars: [40, 45, 50, 58, 54, 63, 70] },
+    ytd: { value: '61,508', delta: 8.4, note: 'Compared to same period last year', bars: [34, 42, 49, 58, 66, 72, 78] },
+  },
+  ontime: {
+    '7d': { value: '94.8%', delta: 1.2, note: 'Improvement from prior week', gauge: 94.8 },
+    '30d': { value: '93.9%', delta: 0.8, note: 'Improvement from prior month', gauge: 93.9 },
+    '90d': { value: '92.6%', delta: -0.4, note: 'Slight dip over prior quarter', gauge: 92.6 },
+    ytd: { value: '93.4%', delta: 1.0, note: 'Improvement versus last year', gauge: 93.4 },
+  },
+  regional: {
+    '7d': {
+      value: 'West',
+      delta: 2.9,
+      note: 'Top region by on-time score',
+      regions: [
+        { name: 'West', score: 96 },
+        { name: 'Midwest', score: 94 },
+        { name: 'Northeast', score: 91 },
+        { name: 'South', score: 89 },
+      ],
+    },
+    '30d': {
+      value: 'Midwest',
+      delta: 1.7,
+      note: 'Top region by on-time score',
+      regions: [
+        { name: 'Midwest', score: 95 },
+        { name: 'West', score: 94 },
+        { name: 'Northeast', score: 90 },
+        { name: 'South', score: 88 },
+      ],
+    },
+    '90d': {
+      value: 'West',
+      delta: 0.9,
+      note: 'Top region by on-time score',
+      regions: [
+        { name: 'West', score: 94 },
+        { name: 'Midwest', score: 93 },
+        { name: 'Northeast', score: 89 },
+        { name: 'South', score: 86 },
+      ],
+    },
+    ytd: {
+      value: 'West',
+      delta: 2.2,
+      note: 'Top region by on-time score',
+      regions: [
+        { name: 'West', score: 95 },
+        { name: 'Midwest', score: 94 },
+        { name: 'Northeast', score: 91 },
+        { name: 'South', score: 87 },
+      ],
+    },
+  },
+  exceptions: {
+    '7d': { value: '47', delta: -9.5, note: 'Fewer exceptions than prior week', severity: { high: 8, medium: 15, low: 24 } },
+    '30d': { value: '198', delta: -6.2, note: 'Fewer exceptions than prior month', severity: { high: 37, medium: 66, low: 95 } },
+    '90d': { value: '612', delta: 2.3, note: 'Slight increase over prior quarter', severity: { high: 121, medium: 202, low: 289 } },
+    ytd: { value: '2,084', delta: -4.1, note: 'Improvement versus same period last year', severity: { high: 389, medium: 701, low: 994 } },
+  },
+} as const
+
+type KpiKey = keyof typeof dashboardData
+
+const selectedRange = reactive<Record<KpiKey, RangeKey>>({
+  shipments: '7d',
+  ontime: '7d',
+  regional: '7d',
+  exceptions: '7d',
+})
+
+function setRange(kpi: KpiKey, range: RangeKey) {
+  selectedRange[kpi] = range
+}
+
+function formatDelta(delta: number) {
+  return `${delta > 0 ? '+' : ''}${delta.toFixed(1)}%`
+}
 </script>
 
 <template>
@@ -57,21 +148,33 @@ const ranges = ['7d', '30d', '90d', 'YTD']
             <h3 class="card-title">Shipment Volume</h3>
             <div class="range-controls">
               <button
-                v-for="(range, i) in ranges"
-                :key="range"
+                v-for="range in ranges"
+                :key="range.key"
                 class="range-btn"
-                :class="{ active: i === 0 }"
+                :class="{ active: selectedRange.shipments === range.key }"
+                @click="setRange('shipments', range.key)"
               >
-                {{ range }}
+                {{ range.label }}
               </button>
             </div>
           </div>
           <div class="kpi-value-row">
-            <p class="kpi-value" data-field="value">—</p>
-            <p class="kpi-delta" data-field="delta">—</p>
+            <p class="kpi-value">{{ dashboardData.shipments[selectedRange.shipments].value }}</p>
+            <p
+              class="kpi-delta"
+              :class="dashboardData.shipments[selectedRange.shipments].delta >= 0 ? 'up' : 'down'"
+            >
+              {{ formatDelta(dashboardData.shipments[selectedRange.shipments].delta) }}
+            </p>
           </div>
-          <p class="kpi-note" data-field="note">—</p>
-          <div class="mini-bars" data-field="chart"></div>
+          <p class="kpi-note">{{ dashboardData.shipments[selectedRange.shipments].note }}</p>
+          <div class="mini-bars">
+            <span
+              v-for="(bar, i) in dashboardData.shipments[selectedRange.shipments].bars"
+              :key="i"
+              :style="{ height: bar + '%' }"
+            ></span>
+          </div>
         </section>
 
         <!-- On-Time Delivery -->
@@ -80,22 +183,31 @@ const ranges = ['7d', '30d', '90d', 'YTD']
             <h3 class="card-title">On-Time Delivery Rate</h3>
             <div class="range-controls">
               <button
-                v-for="(range, i) in ranges"
-                :key="range"
+                v-for="range in ranges"
+                :key="range.key"
                 class="range-btn"
-                :class="{ active: i === 0 }"
+                :class="{ active: selectedRange.ontime === range.key }"
+                @click="setRange('ontime', range.key)"
               >
-                {{ range }}
+                {{ range.label }}
               </button>
             </div>
           </div>
           <div class="kpi-value-row">
-            <p class="kpi-value" data-field="value">—</p>
-            <p class="kpi-delta" data-field="delta">—</p>
+            <p class="kpi-value">{{ dashboardData.ontime[selectedRange.ontime].value }}</p>
+            <p
+              class="kpi-delta"
+              :class="dashboardData.ontime[selectedRange.ontime].delta >= 0 ? 'up' : 'down'"
+            >
+              {{ formatDelta(dashboardData.ontime[selectedRange.ontime].delta) }}
+            </p>
           </div>
-          <p class="kpi-note" data-field="note">—</p>
+          <p class="kpi-note">{{ dashboardData.ontime[selectedRange.ontime].note }}</p>
           <div class="gauge-track">
-            <div class="gauge-fill" data-field="gauge"></div>
+            <div
+              class="gauge-fill"
+              :style="{ width: Math.max(0, Math.min(100, dashboardData.ontime[selectedRange.ontime].gauge)) + '%' }"
+            ></div>
           </div>
         </section>
 
@@ -105,21 +217,36 @@ const ranges = ['7d', '30d', '90d', 'YTD']
             <h3 class="card-title">Regional Performance</h3>
             <div class="range-controls">
               <button
-                v-for="(range, i) in ranges"
-                :key="range"
+                v-for="range in ranges"
+                :key="range.key"
                 class="range-btn"
-                :class="{ active: i === 0 }"
+                :class="{ active: selectedRange.regional === range.key }"
+                @click="setRange('regional', range.key)"
               >
-                {{ range }}
+                {{ range.label }}
               </button>
             </div>
           </div>
           <div class="kpi-value-row">
-            <p class="kpi-value" data-field="value">—</p>
-            <p class="kpi-delta" data-field="delta">—</p>
+            <p class="kpi-value">{{ dashboardData.regional[selectedRange.regional].value }}</p>
+            <p
+              class="kpi-delta"
+              :class="dashboardData.regional[selectedRange.regional].delta >= 0 ? 'up' : 'down'"
+            >
+              {{ formatDelta(dashboardData.regional[selectedRange.regional].delta) }}
+            </p>
           </div>
-          <p class="kpi-note" data-field="note">—</p>
-          <ul class="region-list" data-field="regions"></ul>
+          <p class="kpi-note">{{ dashboardData.regional[selectedRange.regional].note }}</p>
+          <ul class="region-list">
+            <li v-for="region in dashboardData.regional[selectedRange.regional].regions" :key="region.name">
+              <div class="region-label">
+                <span>{{ region.name }}</span><span>{{ region.score }}%</span>
+              </div>
+              <div class="region-bar-track">
+                <div class="region-bar-fill" :style="{ width: region.score + '%' }"></div>
+              </div>
+            </li>
+          </ul>
         </section>
 
         <!-- Open Exceptions -->
@@ -128,21 +255,31 @@ const ranges = ['7d', '30d', '90d', 'YTD']
             <h3 class="card-title">Open Exceptions</h3>
             <div class="range-controls">
               <button
-                v-for="(range, i) in ranges"
-                :key="range"
+                v-for="range in ranges"
+                :key="range.key"
                 class="range-btn"
-                :class="{ active: i === 0 }"
+                :class="{ active: selectedRange.exceptions === range.key }"
+                @click="setRange('exceptions', range.key)"
               >
-                {{ range }}
+                {{ range.label }}
               </button>
             </div>
           </div>
           <div class="kpi-value-row">
-            <p class="kpi-value" data-field="value">—</p>
-            <p class="kpi-delta" data-field="delta">—</p>
+            <p class="kpi-value">{{ dashboardData.exceptions[selectedRange.exceptions].value }}</p>
+            <p
+              class="kpi-delta"
+              :class="dashboardData.exceptions[selectedRange.exceptions].delta >= 0 ? 'up' : 'down'"
+            >
+              {{ formatDelta(dashboardData.exceptions[selectedRange.exceptions].delta) }}
+            </p>
           </div>
-          <p class="kpi-note" data-field="note">—</p>
-          <div class="pill-row" data-field="severity"></div>
+          <p class="kpi-note">{{ dashboardData.exceptions[selectedRange.exceptions].note }}</p>
+          <div class="pill-row">
+            <span class="pill high">High: {{ dashboardData.exceptions[selectedRange.exceptions].severity.high }}</span>
+            <span class="pill medium">Medium: {{ dashboardData.exceptions[selectedRange.exceptions].severity.medium }}</span>
+            <span class="pill low">Low: {{ dashboardData.exceptions[selectedRange.exceptions].severity.low }}</span>
+          </div>
         </section>
       </div>
     </main>
