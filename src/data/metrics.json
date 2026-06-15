@@ -1,0 +1,2010 @@
+{
+  "meta": {
+    "company": "FastForward Logistics",
+    "generatedAt": "2026-06-15T08:00:00-04:00",
+    "currency": "USD",
+    "notes": "Synthetic operations dataset for the internal KPI dashboard."
+  },
+  "ranges": [
+    {
+      "key": "7d",
+      "label": "7d",
+      "description": "Last 7 days"
+    },
+    {
+      "key": "30d",
+      "label": "30d",
+      "description": "Last 30 days"
+    },
+    {
+      "key": "90d",
+      "label": "90d",
+      "description": "Last 90 days"
+    },
+    {
+      "key": "ytd",
+      "label": "YTD",
+      "description": "Jan 1 – Jun 15, 2026"
+    }
+  ],
+  "regions": [
+    {
+      "key": "all",
+      "label": "All Regions"
+    },
+    {
+      "key": "northeast",
+      "label": "Northeast"
+    },
+    {
+      "key": "southeast",
+      "label": "Southeast"
+    },
+    {
+      "key": "midwest",
+      "label": "Midwest"
+    },
+    {
+      "key": "west",
+      "label": "West"
+    },
+    {
+      "key": "southwest",
+      "label": "Southwest"
+    }
+  ],
+  "metrics": {
+    "northeast": {
+      "7d": {
+        "shipments": {
+          "value": 1353,
+          "delta": 4,
+          "trend": [
+            214,
+            214,
+            217,
+            181,
+            182,
+            179,
+            166
+          ]
+        },
+        "onTimeRate": {
+          "value": 93.1,
+          "delta": 0.7,
+          "target": 95,
+          "trend": [
+            93,
+            92.7,
+            93.2,
+            93,
+            92.3,
+            93.5,
+            93.5
+          ]
+        },
+        "exceptions": {
+          "value": 28,
+          "delta": -0.5,
+          "byType": [
+            {
+              "type": "Delayed in transit",
+              "count": 12
+            },
+            {
+              "type": "Weather hold",
+              "count": 5
+            },
+            {
+              "type": "Damaged",
+              "count": 4
+            },
+            {
+              "type": "Address issue",
+              "count": 3
+            },
+            {
+              "type": "Customs hold",
+              "count": 2
+            },
+            {
+              "type": "Other",
+              "count": 2
+            }
+          ]
+        },
+        "regional": [
+          {
+            "hub": "Boston",
+            "shipments": 492,
+            "onTimeRate": 93.6
+          },
+          {
+            "hub": "New York",
+            "shipments": 398,
+            "onTimeRate": 93.2
+          },
+          {
+            "hub": "Philadelphia",
+            "shipments": 420,
+            "onTimeRate": 92.8
+          }
+        ]
+      },
+      "30d": {
+        "shipments": {
+          "value": 5723,
+          "delta": 4,
+          "trend": [
+            1029,
+            923,
+            850,
+            1038,
+            1006,
+            877
+          ]
+        },
+        "onTimeRate": {
+          "value": 92.6,
+          "delta": 0.2,
+          "target": 95,
+          "trend": [
+            93,
+            92.6,
+            92.1,
+            91.9,
+            93.2,
+            92.6
+          ]
+        },
+        "exceptions": {
+          "value": 31,
+          "delta": -4.3,
+          "byType": [
+            {
+              "type": "Delayed in transit",
+              "count": 13
+            },
+            {
+              "type": "Weather hold",
+              "count": 6
+            },
+            {
+              "type": "Damaged",
+              "count": 4
+            },
+            {
+              "type": "Address issue",
+              "count": 4
+            },
+            {
+              "type": "Customs hold",
+              "count": 2
+            },
+            {
+              "type": "Other",
+              "count": 2
+            }
+          ]
+        },
+        "regional": [
+          {
+            "hub": "Boston",
+            "shipments": 1937,
+            "onTimeRate": 93.4
+          },
+          {
+            "hub": "New York",
+            "shipments": 1699,
+            "onTimeRate": 92.7
+          },
+          {
+            "hub": "Philadelphia",
+            "shipments": 1742,
+            "onTimeRate": 92.8
+          }
+        ]
+      },
+      "90d": {
+        "shipments": {
+          "value": 16954,
+          "delta": 5.2,
+          "trend": [
+            3046,
+            2741,
+            3098,
+            2503,
+            2968,
+            2598
+          ]
+        },
+        "onTimeRate": {
+          "value": 92.5,
+          "delta": -0.1,
+          "target": 95,
+          "trend": [
+            92.8,
+            92.7,
+            92.6,
+            91.9,
+            92.5,
+            92.7
+          ]
+        },
+        "exceptions": {
+          "value": 39,
+          "delta": -1.4,
+          "byType": [
+            {
+              "type": "Delayed in transit",
+              "count": 17
+            },
+            {
+              "type": "Weather hold",
+              "count": 7
+            },
+            {
+              "type": "Damaged",
+              "count": 5
+            },
+            {
+              "type": "Address issue",
+              "count": 4
+            },
+            {
+              "type": "Customs hold",
+              "count": 3
+            },
+            {
+              "type": "Other",
+              "count": 2
+            }
+          ]
+        },
+        "regional": [
+          {
+            "hub": "Boston",
+            "shipments": 6226,
+            "onTimeRate": 92.9
+          },
+          {
+            "hub": "New York",
+            "shipments": 5153,
+            "onTimeRate": 93.2
+          },
+          {
+            "hub": "Philadelphia",
+            "shipments": 6182,
+            "onTimeRate": 92.8
+          }
+        ]
+      },
+      "ytd": {
+        "shipments": {
+          "value": 30317,
+          "delta": 6.1,
+          "trend": [
+            2319,
+            2345,
+            2474,
+            2798,
+            2507,
+            2671,
+            2646,
+            2726,
+            2557,
+            2540,
+            2227,
+            2507
+          ]
+        },
+        "onTimeRate": {
+          "value": 92.5,
+          "delta": 0.5,
+          "target": 95,
+          "trend": [
+            91.8,
+            92.1,
+            91.9,
+            92.5,
+            92.5,
+            92,
+            92,
+            93.2,
+            91.9,
+            91.7,
+            93.1,
+            92.6
+          ]
+        },
+        "exceptions": {
+          "value": 48,
+          "delta": -0.9,
+          "byType": [
+            {
+              "type": "Delayed in transit",
+              "count": 21
+            },
+            {
+              "type": "Weather hold",
+              "count": 9
+            },
+            {
+              "type": "Damaged",
+              "count": 6
+            },
+            {
+              "type": "Address issue",
+              "count": 6
+            },
+            {
+              "type": "Customs hold",
+              "count": 4
+            },
+            {
+              "type": "Other",
+              "count": 3
+            }
+          ]
+        },
+        "regional": [
+          {
+            "hub": "Boston",
+            "shipments": 8896,
+            "onTimeRate": 92.5
+          },
+          {
+            "hub": "New York",
+            "shipments": 10882,
+            "onTimeRate": 91.7
+          },
+          {
+            "hub": "Philadelphia",
+            "shipments": 11201,
+            "onTimeRate": 93
+          }
+        ]
+      }
+    },
+    "southeast": {
+      "7d": {
+        "shipments": {
+          "value": 1205,
+          "delta": 5,
+          "trend": [
+            193,
+            192,
+            166,
+            200,
+            159,
+            150,
+            145
+          ]
+        },
+        "onTimeRate": {
+          "value": 91.4,
+          "delta": 0.9,
+          "target": 95,
+          "trend": [
+            91.6,
+            92.3,
+            91,
+            91.7,
+            92.1,
+            92.1,
+            91.1
+          ]
+        },
+        "exceptions": {
+          "value": 30,
+          "delta": -1.6,
+          "byType": [
+            {
+              "type": "Delayed in transit",
+              "count": 13
+            },
+            {
+              "type": "Weather hold",
+              "count": 6
+            },
+            {
+              "type": "Damaged",
+              "count": 4
+            },
+            {
+              "type": "Address issue",
+              "count": 3
+            },
+            {
+              "type": "Customs hold",
+              "count": 2
+            },
+            {
+              "type": "Other",
+              "count": 2
+            }
+          ]
+        },
+        "regional": [
+          {
+            "hub": "Atlanta",
+            "shipments": 419,
+            "onTimeRate": 91
+          },
+          {
+            "hub": "Miami",
+            "shipments": 424,
+            "onTimeRate": 91.5
+          },
+          {
+            "hub": "Charlotte",
+            "shipments": 364,
+            "onTimeRate": 91.7
+          }
+        ]
+      },
+      "30d": {
+        "shipments": {
+          "value": 5168,
+          "delta": 1.8,
+          "trend": [
+            850,
+            812,
+            895,
+            837,
+            959,
+            815
+          ]
+        },
+        "onTimeRate": {
+          "value": 91.4,
+          "delta": -0.2,
+          "target": 95,
+          "trend": [
+            91.2,
+            91.2,
+            91.5,
+            92,
+            92,
+            91.1
+          ]
+        },
+        "exceptions": {
+          "value": 34,
+          "delta": -2.9,
+          "byType": [
+            {
+              "type": "Delayed in transit",
+              "count": 15
+            },
+            {
+              "type": "Weather hold",
+              "count": 6
+            },
+            {
+              "type": "Damaged",
+              "count": 4
+            },
+            {
+              "type": "Address issue",
+              "count": 4
+            },
+            {
+              "type": "Customs hold",
+              "count": 3
+            },
+            {
+              "type": "Other",
+              "count": 2
+            }
+          ]
+        },
+        "regional": [
+          {
+            "hub": "Atlanta",
+            "shipments": 1527,
+            "onTimeRate": 91.7
+          },
+          {
+            "hub": "Miami",
+            "shipments": 1697,
+            "onTimeRate": 91.6
+          },
+          {
+            "hub": "Charlotte",
+            "shipments": 1901,
+            "onTimeRate": 92.2
+          }
+        ]
+      },
+      "90d": {
+        "shipments": {
+          "value": 14803,
+          "delta": 3,
+          "trend": [
+            2193,
+            2533,
+            2622,
+            2248,
+            2441,
+            2766
+          ]
+        },
+        "onTimeRate": {
+          "value": 91.4,
+          "delta": 0.7,
+          "target": 95,
+          "trend": [
+            91,
+            91.4,
+            91.3,
+            92,
+            91,
+            91.6
+          ]
+        },
+        "exceptions": {
+          "value": 41,
+          "delta": -4.5,
+          "byType": [
+            {
+              "type": "Delayed in transit",
+              "count": 18
+            },
+            {
+              "type": "Weather hold",
+              "count": 8
+            },
+            {
+              "type": "Damaged",
+              "count": 5
+            },
+            {
+              "type": "Address issue",
+              "count": 5
+            },
+            {
+              "type": "Customs hold",
+              "count": 3
+            },
+            {
+              "type": "Other",
+              "count": 2
+            }
+          ]
+        },
+        "regional": [
+          {
+            "hub": "Atlanta",
+            "shipments": 5095,
+            "onTimeRate": 91.9
+          },
+          {
+            "hub": "Miami",
+            "shipments": 5244,
+            "onTimeRate": 91.3
+          },
+          {
+            "hub": "Charlotte",
+            "shipments": 5231,
+            "onTimeRate": 90.8
+          }
+        ]
+      },
+      "ytd": {
+        "shipments": {
+          "value": 26338,
+          "delta": 1.6,
+          "trend": [
+            1985,
+            1877,
+            2424,
+            2198,
+            2425,
+            2429,
+            2338,
+            2277,
+            1773,
+            2172,
+            2012,
+            2428
+          ]
+        },
+        "onTimeRate": {
+          "value": 91.1,
+          "delta": 0.2,
+          "target": 95,
+          "trend": [
+            90.6,
+            91.5,
+            91.7,
+            90.9,
+            91,
+            91.7,
+            90.7,
+            92,
+            91,
+            90.7,
+            91.3,
+            90.5
+          ]
+        },
+        "exceptions": {
+          "value": 51,
+          "delta": -1.9,
+          "byType": [
+            {
+              "type": "Delayed in transit",
+              "count": 22
+            },
+            {
+              "type": "Weather hold",
+              "count": 10
+            },
+            {
+              "type": "Damaged",
+              "count": 7
+            },
+            {
+              "type": "Address issue",
+              "count": 6
+            },
+            {
+              "type": "Customs hold",
+              "count": 4
+            },
+            {
+              "type": "Other",
+              "count": 3
+            }
+          ]
+        },
+        "regional": [
+          {
+            "hub": "Atlanta",
+            "shipments": 8395,
+            "onTimeRate": 91.3
+          },
+          {
+            "hub": "Miami",
+            "shipments": 8514,
+            "onTimeRate": 91
+          },
+          {
+            "hub": "Charlotte",
+            "shipments": 8038,
+            "onTimeRate": 90.6
+          }
+        ]
+      }
+    },
+    "midwest": {
+      "7d": {
+        "shipments": {
+          "value": 1267,
+          "delta": 5.3,
+          "trend": [
+            203,
+            167,
+            192,
+            156,
+            205,
+            154,
+            190
+          ]
+        },
+        "onTimeRate": {
+          "value": 94.2,
+          "delta": 0.1,
+          "target": 95,
+          "trend": [
+            93.4,
+            94.9,
+            94.6,
+            94.6,
+            94.3,
+            94,
+            93.8
+          ]
+        },
+        "exceptions": {
+          "value": 23,
+          "delta": -3.7,
+          "byType": [
+            {
+              "type": "Delayed in transit",
+              "count": 10
+            },
+            {
+              "type": "Weather hold",
+              "count": 4
+            },
+            {
+              "type": "Damaged",
+              "count": 3
+            },
+            {
+              "type": "Address issue",
+              "count": 3
+            },
+            {
+              "type": "Customs hold",
+              "count": 2
+            },
+            {
+              "type": "Other",
+              "count": 1
+            }
+          ]
+        },
+        "regional": [
+          {
+            "hub": "Chicago",
+            "shipments": 404,
+            "onTimeRate": 93.2
+          },
+          {
+            "hub": "Columbus",
+            "shipments": 399,
+            "onTimeRate": 93.5
+          },
+          {
+            "hub": "Minneapolis",
+            "shipments": 404,
+            "onTimeRate": 94.4
+          }
+        ]
+      },
+      "30d": {
+        "shipments": {
+          "value": 5292,
+          "delta": 5.5,
+          "trend": [
+            874,
+            767,
+            821,
+            961,
+            976,
+            893
+          ]
+        },
+        "onTimeRate": {
+          "value": 94,
+          "delta": 0.1,
+          "target": 95,
+          "trend": [
+            93.2,
+            94.5,
+            94.8,
+            94.8,
+            94.1,
+            94.8
+          ]
+        },
+        "exceptions": {
+          "value": 25,
+          "delta": -1,
+          "byType": [
+            {
+              "type": "Delayed in transit",
+              "count": 11
+            },
+            {
+              "type": "Weather hold",
+              "count": 5
+            },
+            {
+              "type": "Damaged",
+              "count": 3
+            },
+            {
+              "type": "Address issue",
+              "count": 3
+            },
+            {
+              "type": "Customs hold",
+              "count": 2
+            },
+            {
+              "type": "Other",
+              "count": 1
+            }
+          ]
+        },
+        "regional": [
+          {
+            "hub": "Chicago",
+            "shipments": 1703,
+            "onTimeRate": 93.7
+          },
+          {
+            "hub": "Columbus",
+            "shipments": 1968,
+            "onTimeRate": 94.4
+          },
+          {
+            "hub": "Minneapolis",
+            "shipments": 1746,
+            "onTimeRate": 93.1
+          }
+        ]
+      },
+      "90d": {
+        "shipments": {
+          "value": 15695,
+          "delta": 1.9,
+          "trend": [
+            2884,
+            2504,
+            2436,
+            3020,
+            2510,
+            2341
+          ]
+        },
+        "onTimeRate": {
+          "value": 93.6,
+          "delta": 0.8,
+          "target": 95,
+          "trend": [
+            93.4,
+            94.5,
+            93.6,
+            94.1,
+            94.4,
+            93.1
+          ]
+        },
+        "exceptions": {
+          "value": 32,
+          "delta": -4.3,
+          "byType": [
+            {
+              "type": "Delayed in transit",
+              "count": 14
+            },
+            {
+              "type": "Weather hold",
+              "count": 6
+            },
+            {
+              "type": "Damaged",
+              "count": 4
+            },
+            {
+              "type": "Address issue",
+              "count": 4
+            },
+            {
+              "type": "Customs hold",
+              "count": 2
+            },
+            {
+              "type": "Other",
+              "count": 2
+            }
+          ]
+        },
+        "regional": [
+          {
+            "hub": "Chicago",
+            "shipments": 5196,
+            "onTimeRate": 93.7
+          },
+          {
+            "hub": "Columbus",
+            "shipments": 5147,
+            "onTimeRate": 93.8
+          },
+          {
+            "hub": "Minneapolis",
+            "shipments": 4696,
+            "onTimeRate": 94.3
+          }
+        ]
+      },
+      "ytd": {
+        "shipments": {
+          "value": 27876,
+          "delta": 4.9,
+          "trend": [
+            2068,
+            2668,
+            2251,
+            1965,
+            2181,
+            2545,
+            1942,
+            2492,
+            2584,
+            2454,
+            2631,
+            2095
+          ]
+        },
+        "onTimeRate": {
+          "value": 93.3,
+          "delta": 0.2,
+          "target": 95,
+          "trend": [
+            93.9,
+            93.4,
+            93.6,
+            93.1,
+            93.6,
+            93.4,
+            93.6,
+            93.3,
+            93.1,
+            93.6,
+            92.5,
+            93.5
+          ]
+        },
+        "exceptions": {
+          "value": 39,
+          "delta": -1.9,
+          "byType": [
+            {
+              "type": "Delayed in transit",
+              "count": 17
+            },
+            {
+              "type": "Weather hold",
+              "count": 7
+            },
+            {
+              "type": "Damaged",
+              "count": 5
+            },
+            {
+              "type": "Address issue",
+              "count": 4
+            },
+            {
+              "type": "Customs hold",
+              "count": 3
+            },
+            {
+              "type": "Other",
+              "count": 2
+            }
+          ]
+        },
+        "regional": [
+          {
+            "hub": "Chicago",
+            "shipments": 8734,
+            "onTimeRate": 93.2
+          },
+          {
+            "hub": "Columbus",
+            "shipments": 10109,
+            "onTimeRate": 93.4
+          },
+          {
+            "hub": "Minneapolis",
+            "shipments": 9182,
+            "onTimeRate": 94.2
+          }
+        ]
+      }
+    },
+    "west": {
+      "7d": {
+        "shipments": {
+          "value": 1447,
+          "delta": 2.9,
+          "trend": [
+            206,
+            177,
+            230,
+            200,
+            207,
+            201,
+            226
+          ]
+        },
+        "onTimeRate": {
+          "value": 90.9,
+          "delta": 0.4,
+          "target": 95,
+          "trend": [
+            90,
+            91.7,
+            91.2,
+            90.4,
+            90.8,
+            91.3,
+            91.1
+          ]
+        },
+        "exceptions": {
+          "value": 34,
+          "delta": -1.1,
+          "byType": [
+            {
+              "type": "Delayed in transit",
+              "count": 15
+            },
+            {
+              "type": "Weather hold",
+              "count": 6
+            },
+            {
+              "type": "Damaged",
+              "count": 4
+            },
+            {
+              "type": "Address issue",
+              "count": 4
+            },
+            {
+              "type": "Customs hold",
+              "count": 3
+            },
+            {
+              "type": "Other",
+              "count": 2
+            }
+          ]
+        },
+        "regional": [
+          {
+            "hub": "Los Angeles",
+            "shipments": 480,
+            "onTimeRate": 91.7
+          },
+          {
+            "hub": "Seattle",
+            "shipments": 470,
+            "onTimeRate": 90.8
+          },
+          {
+            "hub": "Oakland",
+            "shipments": 449,
+            "onTimeRate": 89.9
+          }
+        ]
+      },
+      "30d": {
+        "shipments": {
+          "value": 6075,
+          "delta": 5.4,
+          "trend": [
+            1105,
+            921,
+            954,
+            976,
+            1038,
+            1081
+          ]
+        },
+        "onTimeRate": {
+          "value": 91,
+          "delta": 0.9,
+          "target": 95,
+          "trend": [
+            90.4,
+            90.9,
+            91.3,
+            91.1,
+            91.9,
+            90.4
+          ]
+        },
+        "exceptions": {
+          "value": 37,
+          "delta": -2.6,
+          "byType": [
+            {
+              "type": "Delayed in transit",
+              "count": 16
+            },
+            {
+              "type": "Weather hold",
+              "count": 7
+            },
+            {
+              "type": "Damaged",
+              "count": 5
+            },
+            {
+              "type": "Address issue",
+              "count": 4
+            },
+            {
+              "type": "Customs hold",
+              "count": 3
+            },
+            {
+              "type": "Other",
+              "count": 2
+            }
+          ]
+        },
+        "regional": [
+          {
+            "hub": "Los Angeles",
+            "shipments": 1863,
+            "onTimeRate": 91.4
+          },
+          {
+            "hub": "Seattle",
+            "shipments": 1829,
+            "onTimeRate": 91.7
+          },
+          {
+            "hub": "Oakland",
+            "shipments": 2245,
+            "onTimeRate": 91.2
+          }
+        ]
+      },
+      "90d": {
+        "shipments": {
+          "value": 17490,
+          "delta": 2.1,
+          "trend": [
+            2750,
+            2563,
+            2997,
+            2872,
+            2875,
+            3433
+          ]
+        },
+        "onTimeRate": {
+          "value": 90.5,
+          "delta": 0.8,
+          "target": 95,
+          "trend": [
+            90.2,
+            91.3,
+            90.2,
+            90.2,
+            90.5,
+            90.2
+          ]
+        },
+        "exceptions": {
+          "value": 45,
+          "delta": -4.4,
+          "byType": [
+            {
+              "type": "Delayed in transit",
+              "count": 20
+            },
+            {
+              "type": "Weather hold",
+              "count": 9
+            },
+            {
+              "type": "Damaged",
+              "count": 6
+            },
+            {
+              "type": "Address issue",
+              "count": 5
+            },
+            {
+              "type": "Customs hold",
+              "count": 3
+            },
+            {
+              "type": "Other",
+              "count": 2
+            }
+          ]
+        },
+        "regional": [
+          {
+            "hub": "Los Angeles",
+            "shipments": 5644,
+            "onTimeRate": 90.7
+          },
+          {
+            "hub": "Seattle",
+            "shipments": 5906,
+            "onTimeRate": 91
+          },
+          {
+            "hub": "Oakland",
+            "shipments": 5288,
+            "onTimeRate": 90.7
+          }
+        ]
+      },
+      "ytd": {
+        "shipments": {
+          "value": 32012,
+          "delta": 7,
+          "trend": [
+            2443,
+            2362,
+            2737,
+            2497,
+            2768,
+            2711,
+            2554,
+            2592,
+            3026,
+            2693,
+            3099,
+            2530
+          ]
+        },
+        "onTimeRate": {
+          "value": 90.3,
+          "delta": -0.5,
+          "target": 95,
+          "trend": [
+            91.1,
+            90.4,
+            89.9,
+            90.2,
+            90,
+            89.9,
+            89.5,
+            90.4,
+            91,
+            89.9,
+            90.3,
+            90.4
+          ]
+        },
+        "exceptions": {
+          "value": 57,
+          "delta": -3,
+          "byType": [
+            {
+              "type": "Delayed in transit",
+              "count": 25
+            },
+            {
+              "type": "Weather hold",
+              "count": 11
+            },
+            {
+              "type": "Damaged",
+              "count": 7
+            },
+            {
+              "type": "Address issue",
+              "count": 7
+            },
+            {
+              "type": "Customs hold",
+              "count": 4
+            },
+            {
+              "type": "Other",
+              "count": 3
+            }
+          ]
+        },
+        "regional": [
+          {
+            "hub": "Los Angeles",
+            "shipments": 11434,
+            "onTimeRate": 89.6
+          },
+          {
+            "hub": "Seattle",
+            "shipments": 9825,
+            "onTimeRate": 89.6
+          },
+          {
+            "hub": "Oakland",
+            "shipments": 10825,
+            "onTimeRate": 89.7
+          }
+        ]
+      }
+    },
+    "southwest": {
+      "7d": {
+        "shipments": {
+          "value": 799,
+          "delta": 6.1,
+          "trend": [
+            116,
+            97,
+            101,
+            139,
+            116,
+            125,
+            105
+          ]
+        },
+        "onTimeRate": {
+          "value": 94.8,
+          "delta": -0.3,
+          "target": 95,
+          "trend": [
+            95.4,
+            95,
+            94.2,
+            94.8,
+            94.3,
+            95.5,
+            94.2
+          ]
+        },
+        "exceptions": {
+          "value": 14,
+          "delta": -3.1,
+          "byType": [
+            {
+              "type": "Delayed in transit",
+              "count": 6
+            },
+            {
+              "type": "Weather hold",
+              "count": 3
+            },
+            {
+              "type": "Damaged",
+              "count": 2
+            },
+            {
+              "type": "Address issue",
+              "count": 2
+            },
+            {
+              "type": "Customs hold",
+              "count": 1
+            },
+            {
+              "type": "Other",
+              "count": 1
+            }
+          ]
+        },
+        "regional": [
+          {
+            "hub": "Dallas",
+            "shipments": 285,
+            "onTimeRate": 95.4
+          },
+          {
+            "hub": "Phoenix",
+            "shipments": 256,
+            "onTimeRate": 95.2
+          },
+          {
+            "hub": "Houston",
+            "shipments": 268,
+            "onTimeRate": 94.7
+          }
+        ]
+      },
+      "30d": {
+        "shipments": {
+          "value": 3330,
+          "delta": 1.3,
+          "trend": [
+            532,
+            550,
+            507,
+            596,
+            638,
+            507
+          ]
+        },
+        "onTimeRate": {
+          "value": 95,
+          "delta": 0.9,
+          "target": 95,
+          "trend": [
+            95.7,
+            94.3,
+            95.5,
+            94.2,
+            95,
+            94.9
+          ]
+        },
+        "exceptions": {
+          "value": 15,
+          "delta": -5.1,
+          "byType": [
+            {
+              "type": "Delayed in transit",
+              "count": 7
+            },
+            {
+              "type": "Weather hold",
+              "count": 3
+            },
+            {
+              "type": "Damaged",
+              "count": 2
+            },
+            {
+              "type": "Address issue",
+              "count": 2
+            },
+            {
+              "type": "Customs hold",
+              "count": 1
+            },
+            {
+              "type": "Other",
+              "count": 1
+            }
+          ]
+        },
+        "regional": [
+          {
+            "hub": "Dallas",
+            "shipments": 1021,
+            "onTimeRate": 95.5
+          },
+          {
+            "hub": "Phoenix",
+            "shipments": 1053,
+            "onTimeRate": 94.6
+          },
+          {
+            "hub": "Houston",
+            "shipments": 1025,
+            "onTimeRate": 94.4
+          }
+        ]
+      },
+      "90d": {
+        "shipments": {
+          "value": 9509,
+          "delta": 6.7,
+          "trend": [
+            1726,
+            1415,
+            1446,
+            1385,
+            1747,
+            1790
+          ]
+        },
+        "onTimeRate": {
+          "value": 94.6,
+          "delta": 0.7,
+          "target": 95,
+          "trend": [
+            94.6,
+            93.7,
+            95.4,
+            95.5,
+            93.9,
+            93.9
+          ]
+        },
+        "exceptions": {
+          "value": 18,
+          "delta": -3.7,
+          "byType": [
+            {
+              "type": "Delayed in transit",
+              "count": 8
+            },
+            {
+              "type": "Weather hold",
+              "count": 3
+            },
+            {
+              "type": "Damaged",
+              "count": 2
+            },
+            {
+              "type": "Address issue",
+              "count": 2
+            },
+            {
+              "type": "Customs hold",
+              "count": 1
+            },
+            {
+              "type": "Other",
+              "count": 1
+            }
+          ]
+        },
+        "regional": [
+          {
+            "hub": "Dallas",
+            "shipments": 2832,
+            "onTimeRate": 94.1
+          },
+          {
+            "hub": "Phoenix",
+            "shipments": 3022,
+            "onTimeRate": 95.3
+          },
+          {
+            "hub": "Houston",
+            "shipments": 3396,
+            "onTimeRate": 94.4
+          }
+        ]
+      },
+      "ytd": {
+        "shipments": {
+          "value": 17556,
+          "delta": 4.7,
+          "trend": [
+            1452,
+            1493,
+            1589,
+            1532,
+            1599,
+            1182,
+            1531,
+            1277,
+            1634,
+            1455,
+            1230,
+            1582
+          ]
+        },
+        "onTimeRate": {
+          "value": 94,
+          "delta": -0.4,
+          "target": 95,
+          "trend": [
+            94.3,
+            94.1,
+            94.7,
+            94.1,
+            93.8,
+            93.7,
+            93.8,
+            94.1,
+            93.9,
+            93.4,
+            94.1,
+            94.8
+          ]
+        },
+        "exceptions": {
+          "value": 23,
+          "delta": -0.6,
+          "byType": [
+            {
+              "type": "Delayed in transit",
+              "count": 10
+            },
+            {
+              "type": "Weather hold",
+              "count": 4
+            },
+            {
+              "type": "Damaged",
+              "count": 3
+            },
+            {
+              "type": "Address issue",
+              "count": 3
+            },
+            {
+              "type": "Customs hold",
+              "count": 2
+            },
+            {
+              "type": "Other",
+              "count": 1
+            }
+          ]
+        },
+        "regional": [
+          {
+            "hub": "Dallas",
+            "shipments": 5433,
+            "onTimeRate": 93.1
+          },
+          {
+            "hub": "Phoenix",
+            "shipments": 6087,
+            "onTimeRate": 94.8
+          },
+          {
+            "hub": "Houston",
+            "shipments": 5843,
+            "onTimeRate": 93.6
+          }
+        ]
+      }
+    },
+    "all": {
+      "7d": {
+        "shipments": {
+          "value": 6071,
+          "delta": 4.4,
+          "trend": [
+            798,
+            1004,
+            835,
+            782,
+            1010,
+            759,
+            883
+          ]
+        },
+        "onTimeRate": {
+          "value": 92.7,
+          "delta": 0.1,
+          "target": 95,
+          "trend": [
+            93.3,
+            93.5,
+            93.5,
+            92,
+            91.9,
+            92.9,
+            92.7
+          ]
+        },
+        "exceptions": {
+          "value": 129,
+          "delta": -0.9,
+          "byType": [
+            {
+              "type": "Delayed in transit",
+              "count": 56
+            },
+            {
+              "type": "Weather hold",
+              "count": 25
+            },
+            {
+              "type": "Damaged",
+              "count": 17
+            },
+            {
+              "type": "Address issue",
+              "count": 15
+            },
+            {
+              "type": "Customs hold",
+              "count": 10
+            },
+            {
+              "type": "Other",
+              "count": 7
+            }
+          ]
+        },
+        "regional": [
+          {
+            "region": "southwest",
+            "label": "Southwest",
+            "shipments": 799,
+            "onTimeRate": 94.8,
+            "exceptions": 14
+          },
+          {
+            "region": "midwest",
+            "label": "Midwest",
+            "shipments": 1267,
+            "onTimeRate": 94.2,
+            "exceptions": 23
+          },
+          {
+            "region": "northeast",
+            "label": "Northeast",
+            "shipments": 1353,
+            "onTimeRate": 93.1,
+            "exceptions": 28
+          },
+          {
+            "region": "southeast",
+            "label": "Southeast",
+            "shipments": 1205,
+            "onTimeRate": 91.4,
+            "exceptions": 30
+          },
+          {
+            "region": "west",
+            "label": "West",
+            "shipments": 1447,
+            "onTimeRate": 90.9,
+            "exceptions": 34
+          }
+        ]
+      },
+      "30d": {
+        "shipments": {
+          "value": 25588,
+          "delta": 5.3,
+          "trend": [
+            4681,
+            4087,
+            4303,
+            4794,
+            4091,
+            3632
+          ]
+        },
+        "onTimeRate": {
+          "value": 92.6,
+          "delta": -0.4,
+          "target": 95,
+          "trend": [
+            92.6,
+            92.9,
+            92.9,
+            93.5,
+            92.5,
+            93
+          ]
+        },
+        "exceptions": {
+          "value": 142,
+          "delta": -4.5,
+          "byType": [
+            {
+              "type": "Delayed in transit",
+              "count": 62
+            },
+            {
+              "type": "Weather hold",
+              "count": 27
+            },
+            {
+              "type": "Damaged",
+              "count": 18
+            },
+            {
+              "type": "Address issue",
+              "count": 16
+            },
+            {
+              "type": "Customs hold",
+              "count": 11
+            },
+            {
+              "type": "Other",
+              "count": 8
+            }
+          ]
+        },
+        "regional": [
+          {
+            "region": "southwest",
+            "label": "Southwest",
+            "shipments": 3330,
+            "onTimeRate": 95,
+            "exceptions": 15
+          },
+          {
+            "region": "midwest",
+            "label": "Midwest",
+            "shipments": 5292,
+            "onTimeRate": 94,
+            "exceptions": 25
+          },
+          {
+            "region": "northeast",
+            "label": "Northeast",
+            "shipments": 5723,
+            "onTimeRate": 92.6,
+            "exceptions": 31
+          },
+          {
+            "region": "southeast",
+            "label": "Southeast",
+            "shipments": 5168,
+            "onTimeRate": 91.4,
+            "exceptions": 34
+          },
+          {
+            "region": "west",
+            "label": "West",
+            "shipments": 6075,
+            "onTimeRate": 91,
+            "exceptions": 37
+          }
+        ]
+      },
+      "90d": {
+        "shipments": {
+          "value": 74451,
+          "delta": 4,
+          "trend": [
+            10706,
+            12723,
+            13049,
+            10226,
+            13662,
+            14085
+          ]
+        },
+        "onTimeRate": {
+          "value": 92.3,
+          "delta": -0.3,
+          "target": 95,
+          "trend": [
+            91.8,
+            93,
+            91.7,
+            92.1,
+            91.5,
+            92
+          ]
+        },
+        "exceptions": {
+          "value": 175,
+          "delta": -0.8,
+          "byType": [
+            {
+              "type": "Delayed in transit",
+              "count": 76
+            },
+            {
+              "type": "Weather hold",
+              "count": 33
+            },
+            {
+              "type": "Damaged",
+              "count": 23
+            },
+            {
+              "type": "Address issue",
+              "count": 20
+            },
+            {
+              "type": "Customs hold",
+              "count": 13
+            },
+            {
+              "type": "Other",
+              "count": 10
+            }
+          ]
+        },
+        "regional": [
+          {
+            "region": "southwest",
+            "label": "Southwest",
+            "shipments": 9509,
+            "onTimeRate": 94.6,
+            "exceptions": 18
+          },
+          {
+            "region": "midwest",
+            "label": "Midwest",
+            "shipments": 15695,
+            "onTimeRate": 93.6,
+            "exceptions": 32
+          },
+          {
+            "region": "northeast",
+            "label": "Northeast",
+            "shipments": 16954,
+            "onTimeRate": 92.5,
+            "exceptions": 39
+          },
+          {
+            "region": "southeast",
+            "label": "Southeast",
+            "shipments": 14803,
+            "onTimeRate": 91.4,
+            "exceptions": 41
+          },
+          {
+            "region": "west",
+            "label": "West",
+            "shipments": 17490,
+            "onTimeRate": 90.5,
+            "exceptions": 45
+          }
+        ]
+      },
+      "ytd": {
+        "shipments": {
+          "value": 134099,
+          "delta": 3.4,
+          "trend": [
+            10358,
+            10663,
+            11374,
+            13224,
+            10914,
+            11929,
+            12012,
+            10045,
+            10617,
+            10817,
+            10482,
+            11664
+          ]
+        },
+        "onTimeRate": {
+          "value": 92.1,
+          "delta": 0.8,
+          "target": 95,
+          "trend": [
+            91.3,
+            92.8,
+            92.7,
+            92.5,
+            92.9,
+            93,
+            91.5,
+            92.3,
+            91.8,
+            92.7,
+            91.7,
+            91.4
+          ]
+        },
+        "exceptions": {
+          "value": 218,
+          "delta": -3.9,
+          "byType": [
+            {
+              "type": "Delayed in transit",
+              "count": 95
+            },
+            {
+              "type": "Weather hold",
+              "count": 41
+            },
+            {
+              "type": "Damaged",
+              "count": 28
+            },
+            {
+              "type": "Address issue",
+              "count": 25
+            },
+            {
+              "type": "Customs hold",
+              "count": 16
+            },
+            {
+              "type": "Other",
+              "count": 12
+            }
+          ]
+        },
+        "regional": [
+          {
+            "region": "southwest",
+            "label": "Southwest",
+            "shipments": 17556,
+            "onTimeRate": 94,
+            "exceptions": 23
+          },
+          {
+            "region": "midwest",
+            "label": "Midwest",
+            "shipments": 27876,
+            "onTimeRate": 93.3,
+            "exceptions": 39
+          },
+          {
+            "region": "northeast",
+            "label": "Northeast",
+            "shipments": 30317,
+            "onTimeRate": 92.5,
+            "exceptions": 48
+          },
+          {
+            "region": "southeast",
+            "label": "Southeast",
+            "shipments": 26338,
+            "onTimeRate": 91.1,
+            "exceptions": 51
+          },
+          {
+            "region": "west",
+            "label": "West",
+            "shipments": 32012,
+            "onTimeRate": 90.3,
+            "exceptions": 57
+          }
+        ]
+      }
+    }
+  }
+}
