@@ -77,6 +77,8 @@ const revenueSum = computed(() => summarizeMetric(series.value, 'revenue'))
 const viewersSum = computed(() => summarizeMetric(series.value, 'viewers'))
 const conversionsSum = computed(() => summarizeMetric(series.value, 'conversions'))
 const ordersSum = computed(() => summarizeMetric(series.value, 'orders'))
+const churnSum = computed(() => summarizeMetric(series.value, 'churn'))
+const engagementSum = computed(() => summarizeMetric(series.value, 'engagementRate'))
 
 // --- Chart datasets ---
 function lineData(data: number[], color: string, label: string): ChartData<'line' | 'bar'> {
@@ -119,11 +121,17 @@ const conversionsChart = computed(() =>
   lineData(series.value.conversions, palette.orange, 'Conversion rate'),
 )
 const ordersChart = computed(() => barData(series.value.orders, palette.violet, 'Orders'))
+const churnChart = computed(() => lineData(series.value.churn, palette.pink, 'Churn Rate'))
+const engagementChart = computed(() =>
+  lineData(series.value.engagementRate, palette.amber, 'Engagement Rate'),
+)
 
 const revenueOpts = baseLineOptions(fmtMoney)
 const viewersOpts = baseBarOptions(fmtNum)
 const conversionsOpts = baseLineOptions((v) => `${v}%`)
 const ordersOpts = baseBarOptions(fmtNum)
+const churnOpts = baseLineOptions((v) => `${v}%`)
+const engagementOpts = baseLineOptions((v) => `${v}%`)
 
 // --- Products snapshot ---
 const products = computed(() =>
@@ -142,6 +150,8 @@ const metricMeta: Record<
   viewers: { title: 'Viewers', icon: 'mdi-eye', format: fmtNumFull, mode: 'sum' },
   conversions: { title: 'Conversion Rate', icon: 'mdi-percent', format: fmtPct, mode: 'avg' },
   orders: { title: 'Orders', icon: 'mdi-cart', format: fmtNumFull, mode: 'sum' },
+  churn: { title: 'Subscriber Churn', icon: 'mdi-account-minus-outline', format: fmtPct, mode: 'avg' },
+  engagementRate: { title: 'Engagement Rate', icon: 'mdi-heart-pulse', format: fmtPct, mode: 'avg' },
 }
 
 function openDetails(metric: MetricKey) {
@@ -337,6 +347,33 @@ const contextLabel = computed(() => {
               :chart-data="ordersChart"
               :bar-options="ordersOpts"
               @details="openDetails('orders')"
+            />
+          </v-col>
+          <v-col cols="12" md="6" xl="3" class="d-flex">
+            <ReportCard
+              title="Subscriber Churn"
+              icon="mdi-account-minus-outline"
+              :headline="fmtPct(churnSum.average)"
+              caption="avg churn rate"
+              :delta="churnSum.delta"
+              :delta-positive-is-good="false"
+              chart-type="line"
+              :chart-data="churnChart"
+              :line-options="churnOpts"
+              @details="openDetails('churn')"
+            />
+          </v-col>
+          <v-col cols="12" md="6" xl="3" class="d-flex">
+            <ReportCard
+              title="Engagement Rate"
+              icon="mdi-heart-pulse"
+              :headline="fmtPct(engagementSum.average)"
+              caption="avg engagement rate"
+              :delta="engagementSum.delta"
+              chart-type="line"
+              :chart-data="engagementChart"
+              :line-options="engagementOpts"
+              @details="openDetails('engagementRate')"
             />
           </v-col>
         </v-row>

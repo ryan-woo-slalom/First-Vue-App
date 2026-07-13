@@ -3,7 +3,7 @@ import metricsData from '@/data/metrics.json'
 export type SportKey = string
 export type LeagueKey = string
 export type ChannelKey = string
-export type MetricKey = 'revenue' | 'viewers' | 'conversions' | 'orders'
+export type MetricKey = 'revenue' | 'viewers' | 'conversions' | 'orders' | 'churn' | 'engagementRate'
 
 export interface LeagueRef {
   key: LeagueKey
@@ -24,6 +24,8 @@ export interface MonthRow {
   conversions: number
   conversionValue: number
   orders: number
+  churn: number
+  engagementRate: number
 }
 
 export interface ProductRow {
@@ -95,6 +97,8 @@ export interface MetricSeries {
   conversions: number[]
   orders: number[]
   conversionValue: number[]
+  churn: number[]
+  engagementRate: number[]
 }
 
 const EMPTY_ROW = (month: string): MonthRow => ({
@@ -104,6 +108,8 @@ const EMPTY_ROW = (month: string): MonthRow => ({
   conversions: 0,
   conversionValue: 0,
   orders: 0,
+  churn: 0,
+  engagementRate: 0,
 })
 
 // Collect the league monthly arrays that match a sport/league selection.
@@ -136,8 +142,13 @@ function aggregateMonthly(rows: MonthRow[][]): MonthRow[] {
       acc.conversionValue += r.conversionValue
       acc.conversions += r.conversions * r.orders
       convWeight += r.orders
+      acc.churn += r.churn
+      acc.engagementRate += r.engagementRate
     }
     acc.conversions = convWeight > 0 ? acc.conversions / convWeight : 0
+    const rowCount = rows.filter((s) => s[m] != null).length || 1
+    acc.churn = Math.round((acc.churn / rowCount) * 10) / 10
+    acc.engagementRate = Math.round((acc.engagementRate / rowCount) * 10) / 10
     return acc
   })
 }
@@ -187,11 +198,14 @@ export function useMetrics() {
       ),
       orders: idx.map((m) => Math.round((monthly[m]?.orders ?? 0) * ch.share)),
       conversionValue: idx.map((m) => Math.round((monthly[m]?.conversionValue ?? 0) * ch.share)),
+      churn: idx.map((m) => monthly[m]?.churn ?? 0),
+      engagementRate: idx.map((m) => monthly[m]?.engagementRate ?? 0),
     }
   }
 
   function summarizeMetric(series: MetricSeries, metric: MetricKey): MetricSummary {
-    const mode = metric === 'conversions' ? 'avg' : 'sum'
+    const avgMetrics: MetricKey[] = ['conversions', 'churn', 'engagementRate']
+    const mode = avgMetrics.includes(metric) ? 'avg' : 'sum'
     return summarize(series[metric], mode)
   }
 
@@ -219,6 +233,13 @@ export function useMetrics() {
             }
           }
           value = w > 0 ? (value / w) * ch.conversionFactor : 0
+        } else if (metric === 'churn' || metric === 'engagementRate') {
+          let count = 0
+          for (const m of period.months) {
+            const r = monthly[m]
+            if (r) { value += r[metric]; count++ }
+          }
+          value = count > 0 ? value / count : 0
         } else {
           for (const m of period.months) value += monthly[m]?.[metric] ?? 0
           value *= ch.share

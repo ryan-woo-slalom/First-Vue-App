@@ -115,7 +115,9 @@
             "viewers": 4929705,
             "conversions": 3.54,
             "conversionValue": 3197076,
-            "orders": 55122
+            "orders": 55122,
+            "engagementRate": 8.8,
+            "churn": 5.5
           },
           {
             "month": "Feb",
@@ -123,7 +125,9 @@
             "viewers": 4533455,
             "conversions": 3.34,
             "conversionValue": 2985260,
-            "orders": 51470
+            "orders": 51470,
+            "engagementRate": 8.5,
+            "churn": 5.8
           },
           {
             "month": "Mar",
@@ -131,7 +135,9 @@
             "viewers": 4998360,
             "conversions": 2.9,
             "conversionValue": 3527676,
-            "orders": 60822
+            "orders": 60822,
+            "engagementRate": 9.7,
+            "churn": 4.9
           },
           {
             "month": "Apr",
@@ -139,7 +145,9 @@
             "viewers": 5189561,
             "conversions": 3.41,
             "conversionValue": 3879040,
-            "orders": 66880
+            "orders": 66880,
+            "engagementRate": 10.1,
+            "churn": 4.6
           },
           {
             "month": "May",
@@ -147,7 +155,9 @@
             "viewers": 5238470,
             "conversions": 3.59,
             "conversionValue": 3797086,
-            "orders": 65467
+            "orders": 65467,
+            "engagementRate": 10.4,
+            "churn": 4.4
           },
           {
             "month": "Jun",
@@ -155,7 +165,9 @@
             "viewers": 5891187,
             "conversions": 3.24,
             "conversionValue": 3800740,
-            "orders": 65530
+            "orders": 65530,
+            "engagementRate": 9.4,
+            "churn": 5.2
           },
           {
             "month": "Jul",
@@ -163,7 +175,9 @@
             "viewers": 2078814,
             "conversions": 2.89,
             "conversionValue": 1426800,
-            "orders": 24600
+            "orders": 24600,
+            "engagementRate": 7.8,
+            "churn": 6.5
           },
           {
             "month": "Aug",
@@ -171,7 +185,9 @@
             "viewers": 1907695,
             "conversions": 3.4,
             "conversionValue": 1282032,
-            "orders": 22104
+            "orders": 22104,
+            "engagementRate": 8.1,
+            "churn": 6.2
           },
           {
             "month": "Sep",
@@ -179,7 +195,9 @@
             "viewers": 2635111,
             "conversions": 3.31,
             "conversionValue": 1954600,
-            "orders": 33700
+            "orders": 33700,
+            "engagementRate": 9.9,
+            "churn": 4.8
           },
           {
             "month": "Oct",
@@ -187,7 +205,9 @@
             "viewers": 3766279,
             "conversions": 3.56,
             "conversionValue": 2738586,
-            "orders": 47217
+            "orders": 47217,
+            "engagementRate": 10.8,
+            "churn": 4.1
           },
           {
             "month": "Nov",
@@ -195,7 +215,9 @@
             "viewers": 4535040,
             "conversions": 3.52,
             "conversionValue": 3042564,
-            "orders": 52458
+            "orders": 52458,
+            "engagementRate": 11.5,
+            "churn": 3.8
           },
           {
             "month": "Dec",
@@ -203,7 +225,9 @@
             "viewers": 4792326,
             "conversions": 3.16,
             "conversionValue": 3466834,
-            "orders": 59773
+            "orders": 59773,
+            "engagementRate": 11.3,
+            "churn": 4
           }
         ]
       },
@@ -215,7 +239,9 @@
             "viewers": 1030367,
             "conversions": 3.05,
             "conversionValue": 489016,
-            "orders": 11114
+            "orders": 11114,
+            "engagementRate": 8.6,
+            "churn": 5.6
           },
           {
             "month": "Feb",
@@ -223,7 +249,9 @@
             "viewers": 955835,
             "conversions": 3.01,
             "conversionValue": 462396,
-            "orders": 10509
+            "orders": 10509,
+            "engagementRate": 8.3,
+            "churn": 5.9
           },
           {
             "month": "Mar",
@@ -231,7 +259,9 @@
             "viewers": 1052406,
             "conversions": 2.84,
             "conversionValue": 485012,
-            "orders": 11023
+            "orders": 11023,
+            "engagementRate": 9.5,
+            "churn": 5
           },
           {
             "month": "Apr",
@@ -239,7 +269,9 @@
             "viewers": 1174270,
             "conversions": 2.82,
             "conversionValue": 565840,
-            "orders": 12860
+            "orders": 12860,
+            "engagementRate": 9.9,
+            "churn": 4.7
           },
           {
             "month": "May",
@@ -247,7 +279,9 @@
             "viewers": 1150613,
             "conversions": 2.38,
             "conversionValue": 524612,
-            "orders": 11923
+            "orders": 11923,
+            "engagementRate": 10.2,
+            "churn": 4.5
           },
           {
             "month": "Jun",
@@ -255,7 +289,9 @@
             "viewers": 1303618,
             "conversions": 2.39,
             "conversionValue": 614460,
-            "orders": 13965
+            "orders": 13965,
+            "engagementRate": 9.2,
+            "churn": 5.3
           },
           {
             "month": "Jul",
@@ -263,7 +299,9 @@
             "viewers": 458685,
             "conversions": 2.39,
             "conversionValue": 217712,
-            "orders": 4948
+            "orders": 4948,
+            "engagementRate": 7.6,
+            "churn": 6.6
           },
           {
             "month": "Aug",
@@ -271,7 +309,9 @@
             "viewers": 390266,
             "conversions": 2.89,
             "conversionValue": 177892,
-            "orders": 4043
+            "orders": 4043,
+            "engagementRate": 7.9,
+            "churn": 6.3
           },
           {
             "month": "Sep",
@@ -279,7 +319,9 @@
             "viewers": 564697,
             "conversions": 2.52,
             "conversionValue": 266816,
-            "orders": 6064
+            "orders": 6064,
+            "engagementRate": 9.7,
+            "churn": 4.9
           },
           {
             "month": "Oct",
@@ -287,7 +329,9 @@
             "viewers": 793193,
             "conversions": 3.01,
             "conversionValue": 385132,
-            "orders": 8753
+            "orders": 8753,
+            "engagementRate": 10.6,
+            "churn": 4.2
           },
           {
             "month": "Nov",
@@ -295,7 +339,9 @@
             "viewers": 971848,
             "conversions": 2.53,
             "conversionValue": 449020,
-            "orders": 10205
+            "orders": 10205,
+            "engagementRate": 11.3,
+            "churn": 3.9
           },
           {
             "month": "Dec",
@@ -303,7 +349,9 @@
             "viewers": 1009197,
             "conversions": 2.74,
             "conversionValue": 451132,
-            "orders": 10253
+            "orders": 10253,
+            "engagementRate": 11.1,
+            "churn": 4.1
           }
         ]
       },
@@ -315,7 +363,9 @@
             "viewers": 1794769,
             "conversions": 2.8,
             "conversionValue": 870387,
-            "orders": 17763
+            "orders": 17763,
+            "engagementRate": 9,
+            "churn": 5.4
           },
           {
             "month": "Feb",
@@ -323,7 +373,9 @@
             "viewers": 1614517,
             "conversions": 3.16,
             "conversionValue": 779590,
-            "orders": 15910
+            "orders": 15910,
+            "engagementRate": 8.7,
+            "churn": 5.7
           },
           {
             "month": "Mar",
@@ -331,7 +383,9 @@
             "viewers": 1719175,
             "conversions": 2.83,
             "conversionValue": 828982,
-            "orders": 16918
+            "orders": 16918,
+            "engagementRate": 9.9,
+            "churn": 4.8
           },
           {
             "month": "Apr",
@@ -339,7 +393,9 @@
             "viewers": 1793843,
             "conversions": 2.65,
             "conversionValue": 820799,
-            "orders": 16751
+            "orders": 16751,
+            "engagementRate": 10.3,
+            "churn": 4.5
           },
           {
             "month": "May",
@@ -347,7 +403,9 @@
             "viewers": 1889805,
             "conversions": 3.22,
             "conversionValue": 869407,
-            "orders": 17743
+            "orders": 17743,
+            "engagementRate": 10.6,
+            "churn": 4.3
           },
           {
             "month": "Jun",
@@ -355,7 +413,9 @@
             "viewers": 2152281,
             "conversions": 3.04,
             "conversionValue": 1066436,
-            "orders": 21764
+            "orders": 21764,
+            "engagementRate": 9.6,
+            "churn": 5.1
           },
           {
             "month": "Jul",
@@ -363,7 +423,9 @@
             "viewers": 725643,
             "conversions": 3.07,
             "conversionValue": 382053,
-            "orders": 7797
+            "orders": 7797,
+            "engagementRate": 8,
+            "churn": 6.4
           },
           {
             "month": "Aug",
@@ -371,7 +433,9 @@
             "viewers": 657152,
             "conversions": 3.12,
             "conversionValue": 297283,
-            "orders": 6067
+            "orders": 6067,
+            "engagementRate": 8.3,
+            "churn": 6.1
           },
           {
             "month": "Sep",
@@ -379,7 +443,9 @@
             "viewers": 900187,
             "conversions": 3.07,
             "conversionValue": 441294,
-            "orders": 9006
+            "orders": 9006,
+            "engagementRate": 10.1,
+            "churn": 4.7
           },
           {
             "month": "Oct",
@@ -387,7 +453,9 @@
             "viewers": 1292433,
             "conversions": 2.64,
             "conversionValue": 667380,
-            "orders": 13620
+            "orders": 13620,
+            "engagementRate": 11,
+            "churn": 4
           },
           {
             "month": "Nov",
@@ -395,7 +463,9 @@
             "viewers": 1586126,
             "conversions": 2.64,
             "conversionValue": 758716,
-            "orders": 15484
+            "orders": 15484,
+            "engagementRate": 11.7,
+            "churn": 3.7
           },
           {
             "month": "Dec",
@@ -403,7 +473,9 @@
             "viewers": 1739262,
             "conversions": 2.77,
             "conversionValue": 826924,
-            "orders": 16876
+            "orders": 16876,
+            "engagementRate": 11.5,
+            "churn": 3.9
           }
         ]
       }
@@ -417,7 +489,9 @@
             "viewers": 6032059,
             "conversions": 3.73,
             "conversionValue": 4502105,
-            "orders": 73805
+            "orders": 73805,
+            "engagementRate": 8.4,
+            "churn": 5.7
           },
           {
             "month": "Feb",
@@ -425,7 +499,9 @@
             "viewers": 5777977,
             "conversions": 3.67,
             "conversionValue": 4486367,
-            "orders": 73547
+            "orders": 73547,
+            "engagementRate": 8.1,
+            "churn": 6
           },
           {
             "month": "Mar",
@@ -433,7 +509,9 @@
             "viewers": 6188142,
             "conversions": 3.33,
             "conversionValue": 4882989,
-            "orders": 80049
+            "orders": 80049,
+            "engagementRate": 9.3,
+            "churn": 5.1
           },
           {
             "month": "Apr",
@@ -441,7 +519,9 @@
             "viewers": 6192862,
             "conversions": 3.45,
             "conversionValue": 4768248,
-            "orders": 78168
+            "orders": 78168,
+            "engagementRate": 9.7,
+            "churn": 4.8
           },
           {
             "month": "May",
@@ -449,7 +529,9 @@
             "viewers": 6855474,
             "conversions": 3.47,
             "conversionValue": 5045920,
-            "orders": 82720
+            "orders": 82720,
+            "engagementRate": 10,
+            "churn": 4.6
           },
           {
             "month": "Jun",
@@ -457,7 +539,9 @@
             "viewers": 3090888,
             "conversions": 3.59,
             "conversionValue": 2538942,
-            "orders": 41622
+            "orders": 41622,
+            "engagementRate": 9,
+            "churn": 5.4
           },
           {
             "month": "Jul",
@@ -465,7 +549,9 @@
             "viewers": 2483461,
             "conversions": 3.36,
             "conversionValue": 2051735,
-            "orders": 33635
+            "orders": 33635,
+            "engagementRate": 7.4,
+            "churn": 6.7
           },
           {
             "month": "Aug",
@@ -473,7 +559,9 @@
             "viewers": 4857218,
             "conversions": 3.54,
             "conversionValue": 3731858,
-            "orders": 61178
+            "orders": 61178,
+            "engagementRate": 7.7,
+            "churn": 6.4
           },
           {
             "month": "Sep",
@@ -481,7 +569,9 @@
             "viewers": 5911988,
             "conversions": 3.51,
             "conversionValue": 4962655,
-            "orders": 81355
+            "orders": 81355,
+            "engagementRate": 9.5,
+            "churn": 5
           },
           {
             "month": "Oct",
@@ -489,7 +579,9 @@
             "viewers": 6162250,
             "conversions": 3.32,
             "conversionValue": 5205130,
-            "orders": 85330
+            "orders": 85330,
+            "engagementRate": 10.4,
+            "churn": 4.3
           },
           {
             "month": "Nov",
@@ -497,7 +589,9 @@
             "viewers": 5912523,
             "conversions": 3.45,
             "conversionValue": 4512658,
-            "orders": 73978
+            "orders": 73978,
+            "engagementRate": 11.1,
+            "churn": 4
           },
           {
             "month": "Dec",
@@ -505,7 +599,9 @@
             "viewers": 6290260,
             "conversions": 3.12,
             "conversionValue": 5015115,
-            "orders": 82215
+            "orders": 82215,
+            "engagementRate": 10.9,
+            "churn": 4.2
           }
         ]
       },
@@ -517,7 +613,9 @@
             "viewers": 4414087,
             "conversions": 3.2,
             "conversionValue": 3057780,
-            "orders": 55596
+            "orders": 55596,
+            "engagementRate": 7.8,
+            "churn": 6
           },
           {
             "month": "Feb",
@@ -525,7 +623,9 @@
             "viewers": 4039472,
             "conversions": 3.12,
             "conversionValue": 2642090,
-            "orders": 48038
+            "orders": 48038,
+            "engagementRate": 7.5,
+            "churn": 6.3
           },
           {
             "month": "Mar",
@@ -533,7 +633,9 @@
             "viewers": 4384539,
             "conversions": 2.73,
             "conversionValue": 2975225,
-            "orders": 54095
+            "orders": 54095,
+            "engagementRate": 8.7,
+            "churn": 5.4
           },
           {
             "month": "Apr",
@@ -541,7 +643,9 @@
             "viewers": 4778508,
             "conversions": 3.2,
             "conversionValue": 3057670,
-            "orders": 55594
+            "orders": 55594,
+            "engagementRate": 9.1,
+            "churn": 5.1
           },
           {
             "month": "May",
@@ -549,7 +653,9 @@
             "viewers": 4905675,
             "conversions": 3.15,
             "conversionValue": 3395755,
-            "orders": 61741
+            "orders": 61741,
+            "engagementRate": 9.4,
+            "churn": 4.9
           },
           {
             "month": "Jun",
@@ -557,7 +663,9 @@
             "viewers": 2282565,
             "conversions": 3.39,
             "conversionValue": 1491325,
-            "orders": 27115
+            "orders": 27115,
+            "engagementRate": 8.4,
+            "churn": 5.7
           },
           {
             "month": "Jul",
@@ -565,7 +673,9 @@
             "viewers": 1986499,
             "conversions": 2.73,
             "conversionValue": 1291565,
-            "orders": 23483
+            "orders": 23483,
+            "engagementRate": 6.8,
+            "churn": 7
           },
           {
             "month": "Aug",
@@ -573,7 +683,9 @@
             "viewers": 3482341,
             "conversions": 3.24,
             "conversionValue": 2132570,
-            "orders": 38774
+            "orders": 38774,
+            "engagementRate": 7.1,
+            "churn": 6.7
           },
           {
             "month": "Sep",
@@ -581,7 +693,9 @@
             "viewers": 4364836,
             "conversions": 3.27,
             "conversionValue": 2891625,
-            "orders": 52575
+            "orders": 52575,
+            "engagementRate": 8.9,
+            "churn": 5.3
           },
           {
             "month": "Oct",
@@ -589,7 +703,9 @@
             "viewers": 4583970,
             "conversions": 3.5,
             "conversionValue": 3089405,
-            "orders": 56171
+            "orders": 56171,
+            "engagementRate": 9.8,
+            "churn": 4.6
           },
           {
             "month": "Nov",
@@ -597,7 +713,9 @@
             "viewers": 4246295,
             "conversions": 3.02,
             "conversionValue": 2872210,
-            "orders": 52222
+            "orders": 52222,
+            "engagementRate": 10.5,
+            "churn": 4.3
           },
           {
             "month": "Dec",
@@ -605,7 +723,9 @@
             "viewers": 4862289,
             "conversions": 3.18,
             "conversionValue": 3128180,
-            "orders": 56876
+            "orders": 56876,
+            "engagementRate": 10.3,
+            "churn": 4.5
           }
         ]
       },
@@ -617,7 +737,9 @@
             "viewers": 2007997,
             "conversions": 2.74,
             "conversionValue": 1030099,
-            "orders": 21917
+            "orders": 21917,
+            "engagementRate": 8,
+            "churn": 5.9
           },
           {
             "month": "Feb",
@@ -625,7 +747,9 @@
             "viewers": 1694987,
             "conversions": 2.54,
             "conversionValue": 873260,
-            "orders": 18580
+            "orders": 18580,
+            "engagementRate": 7.7,
+            "churn": 6.2
           },
           {
             "month": "Mar",
@@ -633,7 +757,9 @@
             "viewers": 1801948,
             "conversions": 2.74,
             "conversionValue": 925947,
-            "orders": 19701
+            "orders": 19701,
+            "engagementRate": 8.9,
+            "churn": 5.3
           },
           {
             "month": "Apr",
@@ -641,7 +767,9 @@
             "viewers": 2007470,
             "conversions": 2.62,
             "conversionValue": 957061,
-            "orders": 20363
+            "orders": 20363,
+            "engagementRate": 9.3,
+            "churn": 5
           },
           {
             "month": "May",
@@ -649,7 +777,9 @@
             "viewers": 1978831,
             "conversions": 3.13,
             "conversionValue": 1096980,
-            "orders": 23340
+            "orders": 23340,
+            "engagementRate": 9.6,
+            "churn": 4.8
           },
           {
             "month": "Jun",
@@ -657,7 +787,9 @@
             "viewers": 922438,
             "conversions": 2.46,
             "conversionValue": 453362,
-            "orders": 9646
+            "orders": 9646,
+            "engagementRate": 8.6,
+            "churn": 5.6
           },
           {
             "month": "Jul",
@@ -665,7 +797,9 @@
             "viewers": 830611,
             "conversions": 2.97,
             "conversionValue": 448380,
-            "orders": 9540
+            "orders": 9540,
+            "engagementRate": 7,
+            "churn": 6.9
           },
           {
             "month": "Aug",
@@ -673,7 +807,9 @@
             "viewers": 1487607,
             "conversions": 3.15,
             "conversionValue": 730380,
-            "orders": 15540
+            "orders": 15540,
+            "engagementRate": 7.3,
+            "churn": 6.6
           },
           {
             "month": "Sep",
@@ -681,7 +817,9 @@
             "viewers": 1878018,
             "conversions": 2.5,
             "conversionValue": 943525,
-            "orders": 20075
+            "orders": 20075,
+            "engagementRate": 9.1,
+            "churn": 5.2
           },
           {
             "month": "Oct",
@@ -689,7 +827,9 @@
             "viewers": 1955194,
             "conversions": 2.97,
             "conversionValue": 1062059,
-            "orders": 22597
+            "orders": 22597,
+            "engagementRate": 10,
+            "churn": 4.5
           },
           {
             "month": "Nov",
@@ -697,7 +837,9 @@
             "viewers": 1880469,
             "conversions": 3.19,
             "conversionValue": 974545,
-            "orders": 20735
+            "orders": 20735,
+            "engagementRate": 10.7,
+            "churn": 4.2
           },
           {
             "month": "Dec",
@@ -705,7 +847,9 @@
             "viewers": 2068311,
             "conversions": 2.41,
             "conversionValue": 1042084,
-            "orders": 22172
+            "orders": 22172,
+            "engagementRate": 10.5,
+            "churn": 4.4
           }
         ]
       }
@@ -719,7 +863,9 @@
             "viewers": 10300756,
             "conversions": 3.8,
             "conversionValue": 10997064,
-            "orders": 152737
+            "orders": 152737,
+            "engagementRate": 7.6,
+            "churn": 6.1
           },
           {
             "month": "Feb",
@@ -727,7 +873,9 @@
             "viewers": 12327204,
             "conversions": 3.51,
             "conversionValue": 12009024,
-            "orders": 166792
+            "orders": 166792,
+            "engagementRate": 7.3,
+            "churn": 6.4
           },
           {
             "month": "Mar",
@@ -735,7 +883,9 @@
             "viewers": 3241193,
             "conversions": 4.1,
             "conversionValue": 3335112,
-            "orders": 46321
+            "orders": 46321,
+            "engagementRate": 8.5,
+            "churn": 5.5
           },
           {
             "month": "Apr",
@@ -743,7 +893,9 @@
             "viewers": 3204312,
             "conversions": 4.14,
             "conversionValue": 3170736,
-            "orders": 44038
+            "orders": 44038,
+            "engagementRate": 8.9,
+            "churn": 5.2
           },
           {
             "month": "May",
@@ -751,7 +903,9 @@
             "viewers": 3506656,
             "conversions": 4.04,
             "conversionValue": 3791592,
-            "orders": 52661
+            "orders": 52661,
+            "engagementRate": 9.2,
+            "churn": 5
           },
           {
             "month": "Jun",
@@ -759,7 +913,9 @@
             "viewers": 3259556,
             "conversions": 3.67,
             "conversionValue": 3287232,
-            "orders": 45656
+            "orders": 45656,
+            "engagementRate": 8.2,
+            "churn": 5.8
           },
           {
             "month": "Jul",
@@ -767,7 +923,9 @@
             "viewers": 3005369,
             "conversions": 3.98,
             "conversionValue": 2867400,
-            "orders": 39825
+            "orders": 39825,
+            "engagementRate": 6.6,
+            "churn": 7.1
           },
           {
             "month": "Aug",
@@ -775,7 +933,9 @@
             "viewers": 4822944,
             "conversions": 4.13,
             "conversionValue": 5025384,
-            "orders": 69797
+            "orders": 69797,
+            "engagementRate": 6.9,
+            "churn": 6.8
           },
           {
             "month": "Sep",
@@ -783,7 +943,9 @@
             "viewers": 9732872,
             "conversions": 4.14,
             "conversionValue": 9133704,
-            "orders": 126857
+            "orders": 126857,
+            "engagementRate": 8.7,
+            "churn": 5.4
           },
           {
             "month": "Oct",
@@ -791,7 +953,9 @@
             "viewers": 10537353,
             "conversions": 3.41,
             "conversionValue": 10387224,
-            "orders": 144267
+            "orders": 144267,
+            "engagementRate": 9.6,
+            "churn": 4.7
           },
           {
             "month": "Nov",
@@ -799,7 +963,9 @@
             "viewers": 10937330,
             "conversions": 3.76,
             "conversionValue": 10715688,
-            "orders": 148829
+            "orders": 148829,
+            "engagementRate": 10.3,
+            "churn": 4.4
           },
           {
             "month": "Dec",
@@ -807,7 +973,9 @@
             "viewers": 12158432,
             "conversions": 4.07,
             "conversionValue": 11775888,
-            "orders": 163554
+            "orders": 163554,
+            "engagementRate": 10.1,
+            "churn": 4.6
           }
         ]
       },
@@ -819,7 +987,9 @@
             "viewers": 4060737,
             "conversions": 3.2,
             "conversionValue": 2589400,
-            "orders": 51788
+            "orders": 51788,
+            "engagementRate": 7.6,
+            "churn": 6.1
           },
           {
             "month": "Feb",
@@ -827,7 +997,9 @@
             "viewers": 4578520,
             "conversions": 2.89,
             "conversionValue": 2902600,
-            "orders": 58052
+            "orders": 58052,
+            "engagementRate": 7.3,
+            "churn": 6.4
           },
           {
             "month": "Mar",
@@ -835,7 +1007,9 @@
             "viewers": 1178790,
             "conversions": 2.85,
             "conversionValue": 710600,
-            "orders": 14212
+            "orders": 14212,
+            "engagementRate": 8.5,
+            "churn": 5.5
           },
           {
             "month": "Apr",
@@ -843,7 +1017,9 @@
             "viewers": 1298237,
             "conversions": 3.37,
             "conversionValue": 787500,
-            "orders": 15750
+            "orders": 15750,
+            "engagementRate": 8.9,
+            "churn": 5.2
           },
           {
             "month": "May",
@@ -851,7 +1027,9 @@
             "viewers": 1401149,
             "conversions": 3.31,
             "conversionValue": 821300,
-            "orders": 16426
+            "orders": 16426,
+            "engagementRate": 9.2,
+            "churn": 5
           },
           {
             "month": "Jun",
@@ -859,7 +1037,9 @@
             "viewers": 1185592,
             "conversions": 3.37,
             "conversionValue": 666500,
-            "orders": 13330
+            "orders": 13330,
+            "engagementRate": 8.2,
+            "churn": 5.8
           },
           {
             "month": "Jul",
@@ -867,7 +1047,9 @@
             "viewers": 1208142,
             "conversions": 3.19,
             "conversionValue": 722950,
-            "orders": 14459
+            "orders": 14459,
+            "engagementRate": 6.6,
+            "churn": 7.1
           },
           {
             "month": "Aug",
@@ -875,7 +1057,9 @@
             "viewers": 1986800,
             "conversions": 3.28,
             "conversionValue": 1263250,
-            "orders": 25265
+            "orders": 25265,
+            "engagementRate": 6.9,
+            "churn": 6.8
           },
           {
             "month": "Sep",
@@ -883,7 +1067,9 @@
             "viewers": 3837454,
             "conversions": 3.02,
             "conversionValue": 2377200,
-            "orders": 47544
+            "orders": 47544,
+            "engagementRate": 8.7,
+            "churn": 5.4
           },
           {
             "month": "Oct",
@@ -891,7 +1077,9 @@
             "viewers": 4127078,
             "conversions": 3.02,
             "conversionValue": 2456800,
-            "orders": 49136
+            "orders": 49136,
+            "engagementRate": 9.6,
+            "churn": 4.7
           },
           {
             "month": "Nov",
@@ -899,7 +1087,9 @@
             "viewers": 4447631,
             "conversions": 2.71,
             "conversionValue": 2556050,
-            "orders": 51121
+            "orders": 51121,
+            "engagementRate": 10.3,
+            "churn": 4.4
           },
           {
             "month": "Dec",
@@ -907,7 +1097,9 @@
             "viewers": 4436621,
             "conversions": 2.67,
             "conversionValue": 2502750,
-            "orders": 50055
+            "orders": 50055,
+            "engagementRate": 10.1,
+            "churn": 4.6
           }
         ]
       }
@@ -921,7 +1113,9 @@
             "viewers": 1509091,
             "conversions": 2.8,
             "conversionValue": 986202,
-            "orders": 18263
+            "orders": 18263,
+            "engagementRate": 8.6,
+            "churn": 5.6
           },
           {
             "month": "Feb",
@@ -929,7 +1123,9 @@
             "viewers": 1572565,
             "conversions": 3.18,
             "conversionValue": 1016928,
-            "orders": 18832
+            "orders": 18832,
+            "engagementRate": 8.3,
+            "churn": 5.9
           },
           {
             "month": "Mar",
@@ -937,7 +1133,9 @@
             "viewers": 2094899,
             "conversions": 3.18,
             "conversionValue": 1302048,
-            "orders": 24112
+            "orders": 24112,
+            "engagementRate": 9.5,
+            "churn": 5
           },
           {
             "month": "Apr",
@@ -945,7 +1143,9 @@
             "viewers": 3828417,
             "conversions": 2.72,
             "conversionValue": 2315250,
-            "orders": 42875
+            "orders": 42875,
+            "engagementRate": 9.9,
+            "churn": 4.7
           },
           {
             "month": "May",
@@ -953,7 +1153,9 @@
             "viewers": 4089449,
             "conversions": 3.28,
             "conversionValue": 2847312,
-            "orders": 52728
+            "orders": 52728,
+            "engagementRate": 10.2,
+            "churn": 4.5
           },
           {
             "month": "Jun",
@@ -961,7 +1163,9 @@
             "viewers": 4410047,
             "conversions": 2.63,
             "conversionValue": 2694276,
-            "orders": 49894
+            "orders": 49894,
+            "engagementRate": 9.2,
+            "churn": 5.3
           },
           {
             "month": "Jul",
@@ -969,7 +1173,9 @@
             "viewers": 4692963,
             "conversions": 2.85,
             "conversionValue": 3009042,
-            "orders": 55723
+            "orders": 55723,
+            "engagementRate": 7.6,
+            "churn": 6.6
           },
           {
             "month": "Aug",
@@ -977,7 +1183,9 @@
             "viewers": 4625697,
             "conversions": 2.74,
             "conversionValue": 2930040,
-            "orders": 54260
+            "orders": 54260,
+            "engagementRate": 7.9,
+            "churn": 6.3
           },
           {
             "month": "Sep",
@@ -985,7 +1193,9 @@
             "viewers": 4294817,
             "conversions": 2.68,
             "conversionValue": 2782566,
-            "orders": 51529
+            "orders": 51529,
+            "engagementRate": 9.7,
+            "churn": 4.9
           },
           {
             "month": "Oct",
@@ -993,7 +1203,9 @@
             "viewers": 5022307,
             "conversions": 3,
             "conversionValue": 3377484,
-            "orders": 62546
+            "orders": 62546,
+            "engagementRate": 10.6,
+            "churn": 4.2
           },
           {
             "month": "Nov",
@@ -1001,7 +1213,9 @@
             "viewers": 2204843,
             "conversions": 2.7,
             "conversionValue": 1374624,
-            "orders": 25456
+            "orders": 25456,
+            "engagementRate": 11.3,
+            "churn": 3.9
           },
           {
             "month": "Dec",
@@ -1009,7 +1223,9 @@
             "viewers": 1560991,
             "conversions": 3.26,
             "conversionValue": 1010556,
-            "orders": 18714
+            "orders": 18714,
+            "engagementRate": 11.1,
+            "churn": 4.1
           }
         ]
       },
@@ -1021,7 +1237,9 @@
             "viewers": 323582,
             "conversions": 2.62,
             "conversionValue": 118560,
-            "orders": 3120
+            "orders": 3120,
+            "engagementRate": 8.6,
+            "churn": 5.6
           },
           {
             "month": "Feb",
@@ -1029,7 +1247,9 @@
             "viewers": 369481,
             "conversions": 2.55,
             "conversionValue": 130112,
-            "orders": 3424
+            "orders": 3424,
+            "engagementRate": 8.3,
+            "churn": 5.9
           },
           {
             "month": "Mar",
@@ -1037,7 +1257,9 @@
             "viewers": 526245,
             "conversions": 2.6,
             "conversionValue": 209076,
-            "orders": 5502
+            "orders": 5502,
+            "engagementRate": 9.5,
+            "churn": 5
           },
           {
             "month": "Apr",
@@ -1045,7 +1267,9 @@
             "viewers": 980178,
             "conversions": 2.15,
             "conversionValue": 343330,
-            "orders": 9035
+            "orders": 9035,
+            "engagementRate": 9.9,
+            "churn": 4.7
           },
           {
             "month": "May",
@@ -1053,7 +1277,9 @@
             "viewers": 992496,
             "conversions": 2.68,
             "conversionValue": 349790,
-            "orders": 9205
+            "orders": 9205,
+            "engagementRate": 10.2,
+            "churn": 4.5
           },
           {
             "month": "Jun",
@@ -1061,7 +1287,9 @@
             "viewers": 1000416,
             "conversions": 2.83,
             "conversionValue": 370994,
-            "orders": 9763
+            "orders": 9763,
+            "engagementRate": 9.2,
+            "churn": 5.3
           },
           {
             "month": "Jul",
@@ -1069,7 +1297,9 @@
             "viewers": 1011365,
             "conversions": 2.35,
             "conversionValue": 397176,
-            "orders": 10452
+            "orders": 10452,
+            "engagementRate": 7.6,
+            "churn": 6.6
           },
           {
             "month": "Aug",
@@ -1077,7 +1307,9 @@
             "viewers": 1150656,
             "conversions": 2.87,
             "conversionValue": 435974,
-            "orders": 11473
+            "orders": 11473,
+            "engagementRate": 7.9,
+            "churn": 6.3
           },
           {
             "month": "Sep",
@@ -1085,7 +1317,9 @@
             "viewers": 1109153,
             "conversions": 2.15,
             "conversionValue": 404396,
-            "orders": 10642
+            "orders": 10642,
+            "engagementRate": 9.7,
+            "churn": 4.9
           },
           {
             "month": "Oct",
@@ -1093,7 +1327,9 @@
             "viewers": 1187365,
             "conversions": 2.28,
             "conversionValue": 453226,
-            "orders": 11927
+            "orders": 11927,
+            "engagementRate": 10.6,
+            "churn": 4.2
           },
           {
             "month": "Nov",
@@ -1101,7 +1337,9 @@
             "viewers": 527927,
             "conversions": 2.55,
             "conversionValue": 199500,
-            "orders": 5250
+            "orders": 5250,
+            "engagementRate": 11.3,
+            "churn": 3.9
           },
           {
             "month": "Dec",
@@ -1109,7 +1347,9 @@
             "viewers": 388309,
             "conversions": 2.53,
             "conversionValue": 149644,
-            "orders": 3938
+            "orders": 3938,
+            "engagementRate": 11.1,
+            "churn": 4.1
           }
         ]
       }
@@ -1123,7 +1363,9 @@
             "viewers": 2967173,
             "conversions": 3.19,
             "conversionValue": 1888467,
-            "orders": 33131
+            "orders": 33131,
+            "engagementRate": 8,
+            "churn": 5.9
           },
           {
             "month": "Feb",
@@ -1131,7 +1373,9 @@
             "viewers": 2666397,
             "conversions": 2.74,
             "conversionValue": 1703730,
-            "orders": 29890
+            "orders": 29890,
+            "engagementRate": 7.7,
+            "churn": 6.2
           },
           {
             "month": "Mar",
@@ -1139,7 +1383,9 @@
             "viewers": 2886621,
             "conversions": 3.02,
             "conversionValue": 1901007,
-            "orders": 33351
+            "orders": 33351,
+            "engagementRate": 8.9,
+            "churn": 5.3
           },
           {
             "month": "Apr",
@@ -1147,7 +1393,9 @@
             "viewers": 3017431,
             "conversions": 3.14,
             "conversionValue": 1960401,
-            "orders": 34393
+            "orders": 34393,
+            "engagementRate": 9.3,
+            "churn": 5
           },
           {
             "month": "May",
@@ -1155,7 +1403,9 @@
             "viewers": 2978288,
             "conversions": 3.05,
             "conversionValue": 2038548,
-            "orders": 35764
+            "orders": 35764,
+            "engagementRate": 9.6,
+            "churn": 4.8
           },
           {
             "month": "Jun",
@@ -1163,7 +1413,9 @@
             "viewers": 3318865,
             "conversions": 3.17,
             "conversionValue": 2177685,
-            "orders": 38205
+            "orders": 38205,
+            "engagementRate": 8.6,
+            "churn": 5.6
           },
           {
             "month": "Jul",
@@ -1171,7 +1423,9 @@
             "viewers": 949784,
             "conversions": 2.97,
             "conversionValue": 615429,
-            "orders": 10797
+            "orders": 10797,
+            "engagementRate": 7,
+            "churn": 6.9
           },
           {
             "month": "Aug",
@@ -1179,7 +1433,9 @@
             "viewers": 915003,
             "conversions": 2.97,
             "conversionValue": 612408,
-            "orders": 10744
+            "orders": 10744,
+            "engagementRate": 7.3,
+            "churn": 6.6
           },
           {
             "month": "Sep",
@@ -1187,7 +1443,9 @@
             "viewers": 1328543,
             "conversions": 3.06,
             "conversionValue": 900087,
-            "orders": 15791
+            "orders": 15791,
+            "engagementRate": 9.1,
+            "churn": 5.2
           },
           {
             "month": "Oct",
@@ -1195,7 +1453,9 @@
             "viewers": 2202030,
             "conversions": 3.08,
             "conversionValue": 1622049,
-            "orders": 28457
+            "orders": 28457,
+            "engagementRate": 10,
+            "churn": 4.5
           },
           {
             "month": "Nov",
@@ -1203,7 +1463,9 @@
             "viewers": 2754214,
             "conversions": 2.85,
             "conversionValue": 1775436,
-            "orders": 31148
+            "orders": 31148,
+            "engagementRate": 10.7,
+            "churn": 4.2
           },
           {
             "month": "Dec",
@@ -1211,7 +1473,9 @@
             "viewers": 2918328,
             "conversions": 3.17,
             "conversionValue": 2000928,
-            "orders": 35104
+            "orders": 35104,
+            "engagementRate": 10.5,
+            "churn": 4.4
           }
         ]
       },
@@ -1223,7 +1487,9 @@
             "viewers": 868952,
             "conversions": 2.44,
             "conversionValue": 367155,
-            "orders": 8955
+            "orders": 8955,
+            "engagementRate": 9,
+            "churn": 5.4
           },
           {
             "month": "Feb",
@@ -1231,7 +1497,9 @@
             "viewers": 805869,
             "conversions": 2.73,
             "conversionValue": 309509,
-            "orders": 7549
+            "orders": 7549,
+            "engagementRate": 8.7,
+            "churn": 5.7
           },
           {
             "month": "Mar",
@@ -1239,7 +1507,9 @@
             "viewers": 796043,
             "conversions": 2.89,
             "conversionValue": 305983,
-            "orders": 7463
+            "orders": 7463,
+            "engagementRate": 9.9,
+            "churn": 4.8
           },
           {
             "month": "Apr",
@@ -1247,7 +1517,9 @@
             "viewers": 847624,
             "conversions": 2.34,
             "conversionValue": 340997,
-            "orders": 8317
+            "orders": 8317,
+            "engagementRate": 10.3,
+            "churn": 4.5
           },
           {
             "month": "May",
@@ -1255,7 +1527,9 @@
             "viewers": 839171,
             "conversions": 2.31,
             "conversionValue": 320497,
-            "orders": 7817
+            "orders": 7817,
+            "engagementRate": 10.6,
+            "churn": 4.3
           },
           {
             "month": "Jun",
@@ -1263,7 +1537,9 @@
             "viewers": 977157,
             "conversions": 2.33,
             "conversionValue": 389090,
-            "orders": 9490
+            "orders": 9490,
+            "engagementRate": 9.6,
+            "churn": 5.1
           },
           {
             "month": "Jul",
@@ -1271,7 +1547,9 @@
             "viewers": 291853,
             "conversions": 2.35,
             "conversionValue": 110946,
-            "orders": 2706
+            "orders": 2706,
+            "engagementRate": 8,
+            "churn": 6.4
           },
           {
             "month": "Aug",
@@ -1279,7 +1557,9 @@
             "viewers": 266400,
             "conversions": 2.98,
             "conversionValue": 102910,
-            "orders": 2510
+            "orders": 2510,
+            "engagementRate": 8.3,
+            "churn": 6.1
           },
           {
             "month": "Sep",
@@ -1287,7 +1567,9 @@
             "viewers": 390015,
             "conversions": 2.53,
             "conversionValue": 159039,
-            "orders": 3879
+            "orders": 3879,
+            "engagementRate": 10.1,
+            "churn": 4.7
           },
           {
             "month": "Oct",
@@ -1295,7 +1577,9 @@
             "viewers": 651801,
             "conversions": 2.94,
             "conversionValue": 257890,
-            "orders": 6290
+            "orders": 6290,
+            "engagementRate": 11,
+            "churn": 4
           },
           {
             "month": "Nov",
@@ -1303,7 +1587,9 @@
             "viewers": 759146,
             "conversions": 2.79,
             "conversionValue": 286631,
-            "orders": 6991
+            "orders": 6991,
+            "engagementRate": 11.7,
+            "churn": 3.7
           },
           {
             "month": "Dec",
@@ -1311,7 +1597,9 @@
             "viewers": 850736,
             "conversions": 2.75,
             "conversionValue": 345589,
-            "orders": 8429
+            "orders": 8429,
+            "engagementRate": 11.5,
+            "churn": 3.9
           }
         ]
       }
